@@ -1,5 +1,36 @@
-/.kiro
+# Dependencies
+node_modules
+
+# Build outputs
 /.svelte-kit
+/build
+/dist
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE and editor
 /.vscode
-/node_modules
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Testing
+/coverage
+
+# Kiro
+/.kiro
+
+# Lock files (optional - remove if you want to commit)
 /package-lock.json
