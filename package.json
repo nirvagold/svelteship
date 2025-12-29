@@ -35,7 +35,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@lucia-auth/adapter-drizzle": "^1.1.0",
+    "@oslojs/crypto": "^1.0.1",
+    "@oslojs/encoding": "^1.1.0",
     "drizzle-orm": "^0.45.1",
+    "lucia": "^3.2.2",
     "postgres": "^3.4.7"
   }
 }
