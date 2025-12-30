@@ -16,7 +16,10 @@ export const lucia = new Lucia(adapter, {
 		return {
 			email: attributes.email,
 			name: attributes.name,
-			avatarUrl: attributes.avatarUrl
+			avatarUrl: attributes.avatarUrl,
+			emailVerified: attributes.emailVerified,
+			onboardingCompleted: attributes.onboardingCompleted,
+			role: attributes.role
 		};
 	}
 });
@@ -32,4 +35,7 @@ interface DatabaseUserAttributes {
 	email: string;
 	name: string | null;
 	avatarUrl: string | null;
+	emailVerified: boolean;
+	onboardingCompleted: boolean;
+	role: string;
 }
