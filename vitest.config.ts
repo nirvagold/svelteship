@@ -1,11 +1,17 @@
-import { defineConfig, mergeConfig } from 'vitest/config';
-import viteConfig from './vite.config';
+import { defineConfig } from 'vitest/config';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+import { svelteTesting } from '@testing-library/svelte/vite';
 
-export default mergeConfig(
-	viteConfig,
-	defineConfig({
-		test: {
-			include: ['src/**/*.{test,spec}.{js,ts}']
+export default defineConfig({
+	plugins: [svelte(), svelteTesting()],
+	test: {
+		include: ['src/**/*.{test,spec}.{js,ts}'],
+		environment: 'jsdom',
+		setupFiles: ['./src/tests/setup.ts']
+	},
+	resolve: {
+		alias: {
+			$lib: '/src/lib'
 		}
-	})
-);
+	}
+});
