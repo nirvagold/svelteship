@@ -8,6 +8,7 @@
 	interface Props {
 		options: DropdownOption[];
 		value?: string;
+		name?: string;
 		placeholder?: string;
 		disabled?: boolean;
 		error?: string;
@@ -18,6 +19,7 @@
 	let {
 		options,
 		value = $bindable(),
+		name,
 		placeholder = 'Select an option',
 		disabled = false,
 		error,
@@ -41,20 +43,28 @@
 			isOpen = false;
 		}
 	}
+
+	const inputId = `dropdown-${name || Math.random().toString(36).slice(2, 9)}`;
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
 
 <div class="form-control w-full">
 	{#if label}
-		<label class="label">
+		<label class="label" for={inputId}>
 			<span class="label-text">{label}</span>
 		</label>
+	{/if}
+
+	<!-- Hidden input for form submission -->
+	{#if name}
+		<input type="hidden" {name} {value} />
 	{/if}
 
 	<div class="dropdown w-full" class:dropdown-open={isOpen}>
 		<button
 			type="button"
+			id={inputId}
 			class="btn btn-outline w-full justify-between"
 			class:btn-error={error}
 			{disabled}
@@ -93,7 +103,7 @@
 	</div>
 
 	{#if error}
-		<label class="label">
+		<label class="label" for={inputId}>
 			<span class="label-text-alt text-error">{error}</span>
 		</label>
 	{/if}
