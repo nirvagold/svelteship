@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { page } from '$app/stores';
+	import { Breadcrumb } from '$lib/components/ui';
 
 	interface Props {
 		data: {
@@ -24,6 +25,20 @@
 
 	function isActive(href: string): boolean {
 		return $page.url.pathname.startsWith(href);
+	}
+
+	function getBreadcrumbs(pathname: string) {
+		const items: Array<{ label: string; href?: string }> = [{ label: 'Admin', href: '/admin-dashboard' }];
+
+		if (pathname === '/admin-dashboard') {
+			items.push({ label: 'Dashboard' });
+		} else if (pathname.startsWith('/admin/users')) {
+			items.push({ label: 'Users' });
+		} else if (pathname.startsWith('/admin/settings')) {
+			items.push({ label: 'Settings' });
+		}
+
+		return items;
 	}
 </script>
 
@@ -53,7 +68,8 @@
 	</header>
 
 	<div class="container mx-auto px-4 py-6">
-		<div class="flex gap-6">
+		<Breadcrumb items={getBreadcrumbs($page.url.pathname)} />
+		<div class="flex gap-6 mt-4">
 			<!-- Sidebar -->
 			<aside class="w-64 shrink-0">
 				<nav class="card bg-base-100 shadow-sm">

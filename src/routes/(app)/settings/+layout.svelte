@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import { page } from '$app/stores';
+	import { Breadcrumb } from '$lib/components/ui';
 
 	interface Props {
 		children: Snippet;
@@ -20,10 +21,26 @@
 		}
 		return currentPath.startsWith(href);
 	}
+
+	function getBreadcrumbs(pathname: string) {
+		const items: Array<{ label: string; href?: string }> = [
+			{ label: 'Dashboard', href: '/dashboard' },
+			{ label: 'Settings', href: '/settings' }
+		];
+
+		if (pathname === '/settings/security') {
+			items.push({ label: 'Security', href: undefined });
+		} else if (pathname === '/settings/sessions') {
+			items.push({ label: 'Sessions', href: undefined });
+		}
+
+		return items;
+	}
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-4xl">
-	<h1 class="text-3xl font-bold mb-6">Settings</h1>
+	<Breadcrumb items={getBreadcrumbs($page.url.pathname)} />
+	<h1 class="text-3xl font-bold mb-6 mt-4">Settings</h1>
 
 	<!-- Tabs Navigation -->
 	<div class="tabs tabs-boxed mb-6">
