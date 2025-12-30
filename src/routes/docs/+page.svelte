@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui';
+	import ThemeSelector from '$lib/components/ThemeSelector.svelte';
 	import { copyToClipboard } from '$lib/utils';
 
 	let copiedId = $state<string | null>(null);
@@ -18,11 +19,13 @@
 </script>
 
 <div class="container mx-auto px-4 py-8 max-w-4xl">
-	<h1 class="text-3xl font-bold mb-2">Utilities & Hooks Documentation</h1>
-	<p class="text-base-content/70 mb-8">Helper functions and hooks for building applications faster.</p>
+	<h1 class="text-3xl font-bold mb-2">Documentation</h1>
+	<p class="text-base-content/70 mb-8">Layouts, utilities, and hooks for building applications faster.</p>
 
 	<!-- Navigation -->
 	<div class="flex flex-wrap gap-2 mb-8">
+		<a href="#layouts" class="btn btn-sm btn-outline">Layouts</a>
+		<a href="#theme" class="btn btn-sm btn-outline">Theme</a>
 		<a href="#hooks" class="btn btn-sm btn-outline">Hooks</a>
 		<a href="#date" class="btn btn-sm btn-outline">Date</a>
 		<a href="#currency" class="btn btn-sm btn-outline">Currency</a>
@@ -31,6 +34,202 @@
 		<a href="#clipboard" class="btn btn-sm btn-outline">Clipboard</a>
 		<a href="#csv" class="btn btn-sm btn-outline">CSV</a>
 	</div>
+
+	<!-- Layout Components Section -->
+	<section id="layouts" class="mb-12">
+		<h2 class="text-2xl font-bold mb-4 border-b pb-2">Layout Components</h2>
+
+		<!-- SidebarLayout -->
+		<div class="card bg-base-200 mb-6">
+			<div class="card-body">
+				<h3 class="card-title">SidebarLayout</h3>
+				<p class="text-base-content/70">Sidebar navigation with collapsible menu and mobile hamburger.</p>
+				<div class="mockup-code mt-4 text-sm">
+					<pre><code>{`<script lang="ts">
+  import { SidebarLayout } from '$lib/components/layouts';
+
+  const navItems = [
+    { label: 'Dashboard', href: '/dashboard', icon: '📊' },
+    { label: 'Settings', href: '/settings', icon: '⚙️' }
+  ];
+${scriptEnd}
+
+<SidebarLayout {navItems} collapsible>
+  {#snippet header()}
+    <h1>My App</h1>
+  {/snippet}
+  <main>Content here</main>
+</SidebarLayout>`}</code></pre>
+				</div>
+				<Button
+					size="sm"
+					variant="ghost"
+					onclick={() => copyCode(`import { SidebarLayout } from '$lib/components/layouts';
+
+const navItems = [
+  { label: 'Dashboard', href: '/dashboard', icon: '📊' },
+  { label: 'Settings', href: '/settings', icon: '⚙️' }
+];`, 'sidebar')}
+				>
+					{copiedId === 'sidebar' ? '✓ Copied!' : 'Copy'}
+				</Button>
+			</div>
+		</div>
+
+		<!-- TopbarLayout -->
+		<div class="card bg-base-200 mb-6">
+			<div class="card-body">
+				<h3 class="card-title">TopbarLayout</h3>
+				<p class="text-base-content/70">Top navigation bar with sticky option and mobile menu.</p>
+				<div class="mockup-code mt-4 text-sm">
+					<pre><code>{`<script lang="ts">
+  import { TopbarLayout } from '$lib/components/layouts';
+
+  const navItems = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' }
+  ];
+${scriptEnd}
+
+<TopbarLayout {navItems} sticky>
+  {#snippet logo()}
+    <span class="font-bold">Logo</span>
+  {/snippet}
+  {#snippet actions()}
+    <button class="btn btn-primary">Sign In</button>
+  {/snippet}
+  <main>Content here</main>
+</TopbarLayout>`}</code></pre>
+				</div>
+				<Button
+					size="sm"
+					variant="ghost"
+					onclick={() => copyCode(`import { TopbarLayout } from '$lib/components/layouts';
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' }
+];`, 'topbar')}
+				>
+					{copiedId === 'topbar' ? '✓ Copied!' : 'Copy'}
+				</Button>
+			</div>
+		</div>
+
+		<!-- CenteredLayout -->
+		<div class="card bg-base-200 mb-6">
+			<div class="card-body">
+				<h3 class="card-title">CenteredLayout</h3>
+				<p class="text-base-content/70">Centered content with configurable max-width. Perfect for auth pages.</p>
+				<div class="mockup-code mt-4 text-sm">
+					<pre><code>{`<script lang="ts">
+  import { CenteredLayout } from '$lib/components/layouts';
+${scriptEnd}
+
+<CenteredLayout size="md" background="gradient">
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2>Login</h2>
+      <!-- form content -->
+    </div>
+  </div>
+</CenteredLayout>`}</code></pre>
+				</div>
+				<Button
+					size="sm"
+					variant="ghost"
+					onclick={() => copyCode(`import { CenteredLayout } from '$lib/components/layouts';
+
+// Sizes: 'sm' | 'md' | 'lg' | 'xl' | 'full'
+// Backgrounds: 'none' | 'base' | 'gradient'`, 'centered')}
+				>
+					{copiedId === 'centered' ? '✓ Copied!' : 'Copy'}
+				</Button>
+			</div>
+		</div>
+
+		<!-- SplitLayout -->
+		<div class="card bg-base-200 mb-6">
+			<div class="card-body">
+				<h3 class="card-title">SplitLayout</h3>
+				<p class="text-base-content/70">Two-column layout with configurable ratio. Stacks on mobile.</p>
+				<div class="mockup-code mt-4 text-sm">
+					<pre><code>{`<script lang="ts">
+  import { SplitLayout } from '$lib/components/layouts';
+${scriptEnd}
+
+<SplitLayout ratio="1/2" reverse>
+  {#snippet left()}
+    <div class="bg-primary text-primary-content p-8">
+      <h1>Welcome</h1>
+    </div>
+  {/snippet}
+  {#snippet right()}
+    <div class="p-8">
+      <form><!-- login form --></form>
+    </div>
+  {/snippet}
+</SplitLayout>`}</code></pre>
+				</div>
+				<Button
+					size="sm"
+					variant="ghost"
+					onclick={() => copyCode(`import { SplitLayout } from '$lib/components/layouts';
+
+// Ratios: '1/2' | '1/3' | '2/3' | '1/1'
+// reverse: swaps order on mobile`, 'split')}
+				>
+					{copiedId === 'split' ? '✓ Copied!' : 'Copy'}
+				</Button>
+			</div>
+		</div>
+	</section>
+
+	<!-- Theme Section -->
+	<section id="theme" class="mb-12">
+		<h2 class="text-2xl font-bold mb-4 border-b pb-2">Theme</h2>
+
+		<div class="card bg-base-200 mb-6">
+			<div class="card-body">
+				<h3 class="card-title">ThemeSelector</h3>
+				<p class="text-base-content/70">Dropdown selector for all DaisyUI themes with preview.</p>
+				
+				<!-- Live Demo -->
+				<div class="flex items-center gap-4 my-4 p-4 bg-base-300 rounded-lg">
+					<span class="text-sm font-medium">Try it:</span>
+					<ThemeSelector showLabel size="sm" />
+				</div>
+
+				<div class="mockup-code mt-4 text-sm">
+					<pre><code>{`<script lang="ts">
+  import ThemeSelector from '$lib/components/ThemeSelector.svelte';
+${scriptEnd}
+
+<!-- Basic -->
+<ThemeSelector />
+
+<!-- With label -->
+<ThemeSelector showLabel />
+
+<!-- Custom themes subset -->
+<ThemeSelector themes={['light', 'dark', 'cupcake', 'dracula']} />
+
+<!-- Different sizes -->
+<ThemeSelector size="xs" />
+<ThemeSelector size="lg" />`}</code></pre>
+				</div>
+				<Button
+					size="sm"
+					variant="ghost"
+					onclick={() => copyCode(`import ThemeSelector from '$lib/components/ThemeSelector.svelte';
+
+<ThemeSelector showLabel size="sm" />`, 'theme')}
+				>
+					{copiedId === 'theme' ? '✓ Copied!' : 'Copy'}
+				</Button>
+			</div>
+		</div>
+	</section>
 
 	<!-- Hooks Section -->
 	<section id="hooks" class="mb-12">
