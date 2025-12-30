@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	let { data, children } = $props();
 
@@ -41,7 +42,8 @@
 			<div class="flex-1">
 				<a href="/dashboard" class="btn btn-ghost text-xl">Svelteship</a>
 			</div>
-			<div class="flex-none">
+			<div class="flex-none flex items-center gap-1">
+				<ThemeToggle />
 				<div class="dropdown dropdown-end">
 					<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar placeholder">
 						<div class="bg-neutral text-neutral-content w-10 rounded-full">
@@ -141,6 +143,7 @@
 						<p class="text-sm font-medium truncate">{data.user.name || 'User'}</p>
 						<p class="text-xs text-base-content/60 truncate">{data.user.email}</p>
 					</div>
+					<ThemeToggle />
 					<form action="/logout" method="POST">
 						<button type="submit" class="btn btn-ghost btn-sm btn-square" aria-label="Logout">
 							<svg
