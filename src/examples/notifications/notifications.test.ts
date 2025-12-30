@@ -64,13 +64,17 @@ describe('Notifications Properties', () => {
 				);
 			}
 
+			// Use integer timestamps to avoid NaN date issues
+			const minTime = new Date('2024-01-01').getTime();
+			const maxTime = new Date('2025-12-31').getTime();
+
 			fc.assert(
 				fc.property(
 					fc.array(
 						fc.record({
 							id: fc.uuid(),
 							title: fc.string({ minLength: 1, maxLength: 50 }),
-							createdAt: fc.date({ min: new Date('2024-01-01'), max: new Date('2025-12-31') })
+							createdAt: fc.integer({ min: minTime, max: maxTime }).map((t) => new Date(t))
 						}),
 						{ minLength: 1, maxLength: 20 }
 					),

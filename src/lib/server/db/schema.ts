@@ -18,6 +18,7 @@ export const users = pgTable('users', {
 	emailVerified: boolean('email_verified').default(false).notNull(),
 	preferences: jsonb('preferences').$type<UserPreferences>(),
 	role: text('role').default('user').notNull(), // 'user' | 'admin'
+	locale: text('locale').default('en'),
 	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
 	updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull()
 });
@@ -31,6 +32,20 @@ export const sessions = pgTable('sessions', {
 	expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
 	userAgent: text('user_agent'),
 	ipAddress: text('ip_address'),
+	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
+});
+
+// OAuth accounts table for social login
+export const oauthAccounts = pgTable('oauth_accounts', {
+	id: text('id').primaryKey(),
+	userId: text('user_id')
+		.notNull()
+		.references(() => users.id, { onDelete: 'cascade' }),
+	provider: text('provider').notNull(), // 'google' | 'github'
+	providerAccountId: text('provider_account_id').notNull(),
+	accessToken: text('access_token'),
+	refreshToken: text('refresh_token'),
+	expiresAt: timestamp('expires_at', { withTimezone: true }),
 	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
 });
 
@@ -62,6 +77,8 @@ export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Session = typeof sessions.$inferSelect;
 export type NewSession = typeof sessions.$inferInsert;
+export type OAuthAccount = typeof oauthAccounts.$inferSelect;
+export type NewOAuthAccount = typeof oauthAccounts.$inferInsert;
 export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
 export type NewPasswordResetToken = typeof passwordResetTokens.$inferInsert;
 export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
