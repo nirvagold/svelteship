@@ -67,7 +67,7 @@
 	<title>Notifications - Svelteship</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 max-w-2xl">
+<div>
 	<div class="flex items-center justify-between mb-6">
 		<div>
 			<h1 class="text-3xl font-bold">Notifications</h1>

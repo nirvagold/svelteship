@@ -38,7 +38,7 @@
 	}
 </script>
 
-<div class="container mx-auto px-4 py-8 max-w-4xl">
+<div>
 	<Breadcrumb items={getBreadcrumbs($page.url.pathname)} />
 	<h1 class="text-3xl font-bold mb-6 mt-4">Settings</h1>
 
