@@ -28,8 +28,10 @@ npm-debug.log*
 
 # Testing
 /coverage
+*.test.ts
 
 # Kiro
 /.kiro
 
+# 
 # Lock files - keep package-lock.json for reproducible builds
