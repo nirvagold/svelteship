@@ -34,6 +34,8 @@
 
 ## 📸 Preview
 
+**[🔗 View Interactive Preview](https://nirvagold.github.io/svelteship/preview/)** ← Deploy to GitHub Pages to see live mockups
+
 ### 🏠 Landing Page
 
 <table>
@@ -186,7 +188,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/svelteship.git
+git clone https://github.com/nirvagold/svelteship.git
 cd svelteship
 
 # Install dependencies

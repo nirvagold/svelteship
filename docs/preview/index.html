@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Svelteship - Preview</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .preview-frame {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    .preview-header {
+      background: #f3f4f6;
+      padding: 8px 12px;
+      display: flex;
+      gap: 6px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .preview-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .preview-content {
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+<body class="bg-base-200 min-h-screen p-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">🚀 Svelteship Preview</h1>
+      <p class="text-base-content/70">Interactive mockups of the boilerplate pages</p>
+      <div class="flex justify-center gap-4 mt-4">
+        <a href="https://github.com/nirvagold/svelteship" class="btn btn-primary">View on GitHub</a>
+        <button onclick="toggleTheme()" class="btn btn-outline">Toggle Theme</button>
+      </div>
+    </div>
+
+    <!-- Landing Page -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">🏠 Landing Page</h2>
+      <div class="preview-frame">
+        <div class="preview-header">
+          <div class="preview-dot bg-red-400"></div>
+          <div class="preview-dot bg-yellow-400"></div>
+          <div class="preview-dot bg-green-400"></div>
+        </div>
+        <div class="preview-content">
+          <div class="hero min-h-[500px] bg-base-200">
+            <div class="hero-content text-center">
+              <div class="max-w-2xl">
+                <h1 class="text-5xl font-bold">🚀 Svelteship</h1>
+                <p class="py-6 text-lg text-base-content/70">
+                  Full-stack SvelteKit boilerplate with authentication, database, and UI components ready to use.
+                  Ship modern web applications quickly and securely.
+                </p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                  <button class="btn btn-primary btn-lg">Get Started</button>
+                  <button class="btn btn-outline btn-lg">Sign In</button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+                  <div class="card bg-base-100 shadow-md">
+                    <div class="card-body items-center text-center">
+                      <div class="text-4xl mb-2">🔐</div>
+                      <h3 class="card-title text-lg">Authentication</h3>
+                      <p class="text-sm text-base-content/70">Lucia Auth with session management</p>
+                    </div>
+                  </div>
+                  <div class="card bg-base-100 shadow-md">
+                    <div class="card-body items-center text-center">
+                      <div class="text-4xl mb-2">🗄️</div>
+                      <h3 class="card-title text-lg">Database</h3>
+                      <p class="text-sm text-base-content/70">PostgreSQL + Drizzle ORM</p>
+                    </div>
+                  </div>
+                  <div class="card bg-base-100 shadow-md">
+                    <div class="card-body items-center text-center">
+                      <div class="text-4xl mb-2">🎨</div>
+                      <h3 class="card-title text-lg">UI Components</h3>
+                      <p class="text-sm text-base-content/70">Tailwind CSS + DaisyUI</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login Page -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">🔑 Login Page</h2>
+      <div class="preview-frame">
+        <div class="preview-header">
+          <div class="preview-dot bg-red-400"></div>
+          <div class="preview-dot bg-yellow-400"></div>
+          <div class="preview-dot bg-green-400"></div>
+        </div>
+        <div class="preview-content p-8 flex justify-center bg-base-200">
+          <div class="card bg-base-100 shadow-xl w-full max-w-md">
+            <div class="card-body">
+              <h1 class="card-title text-2xl font-bold justify-center mb-2">Welcome Back</h1>
+              <p class="text-center text-base-content/70 mb-4">Sign in to your Svelteship account</p>
+              <div class="form-control mb-4">
+                <label class="label"><span class="label-text">Email</span></label>
+                <input type="email" placeholder="you@example.com" class="input input-bordered w-full" />
+              </div>
+              <div class="form-control mb-6">
+                <label class="label"><span class="label-text">Password</span></label>
+                <input type="password" placeholder="Enter your password" class="input input-bordered w-full" />
+              </div>
+              <button class="btn btn-primary w-full">Sign In</button>
+              <div class="divider">OR</div>
+              <p class="text-center text-sm">
+                Don't have an account? <a href="#" class="link link-primary">Create one</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">📊 Dashboard</h2>
+      <div class="preview-frame">
+        <div class="preview-header">
+          <div class="preview-dot bg-red-400"></div>
+          <div class="preview-dot bg-yellow-400"></div>
+          <div class="preview-dot bg-green-400"></div>
+        </div>
+        <div class="preview-content">
+          <div class="drawer lg:drawer-open">
+            <input id="preview-drawer" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col">
+              <div class="navbar bg-base-100 lg:hidden border-b border-base-300">
+                <div class="flex-none">
+                  <label for="preview-drawer" class="btn btn-square btn-ghost">☰</label>
+                </div>
+                <div class="flex-1"><span class="btn btn-ghost text-xl">Svelteship</span></div>
+              </div>
+              <main class="flex-1 p-6 bg-base-200">
+                <div class="max-w-4xl mx-auto">
+                  <div class="mb-8">
+                    <h1 class="text-3xl font-bold mb-2">Welcome back, User!</h1>
+                    <p class="text-base-content/70">Here's what's happening with your account.</p>
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="stat bg-base-100 rounded-box shadow">
+                      <div class="stat-title">Account Status</div>
+                      <div class="stat-value text-primary text-2xl">Active</div>
+                      <div class="stat-desc">Your account is in good standing</div>
+                    </div>
+                    <div class="stat bg-base-100 rounded-box shadow">
+                      <div class="stat-title">Security</div>
+                      <div class="stat-value text-secondary text-2xl">Secure</div>
+                      <div class="stat-desc">Session authenticated</div>
+                    </div>
+                    <div class="stat bg-base-100 rounded-box shadow">
+                      <div class="stat-title">Stack</div>
+                      <div class="stat-value text-accent text-2xl">Ready</div>
+                      <div class="stat-desc">SvelteKit + Lucia + Drizzle</div>
+                    </div>
+                  </div>
+                  <div class="card bg-base-100 shadow-lg">
+                    <div class="card-body">
+                      <h2 class="card-title mb-4">💡 Getting Started</h2>
+                      <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                          <div class="badge badge-primary badge-lg">1</div>
+                          <div>
+                            <h3 class="font-semibold">Customize your profile</h3>
+                            <p class="text-base-content/70 text-sm">Add your name and personalize your account settings.</p>
+                          </div>
+                        </div>
+                        <div class="divider my-2"></div>
+                        <div class="flex gap-4 items-start">
+                          <div class="badge badge-primary badge-lg">2</div>
+                          <div>
+                            <h3 class="font-semibold">Explore the codebase</h3>
+                            <p class="text-base-content/70 text-sm">Check out the project structure.</p>
+                          </div>
+                        </div>
+                        <div class="divider my-2"></div>
+                        <div class="flex gap-4 items-start">
+                          <div class="badge badge-primary badge-lg">3</div>
+                          <div>
+                            <h3 class="font-semibold">Build your features</h3>
+                            <p class="text-base-content/70 text-sm">Start adding your own routes and components.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </main>
+            </div>
+            <div class="drawer-side">
+              <label for="preview-drawer" class="drawer-overlay"></label>
+              <aside class="bg-base-100 min-h-full w-64 border-r border-base-300">
+                <div class="p-4 border-b border-base-300">
+                  <span class="text-xl font-bold">Svelteship</span>
+                </div>
+                <ul class="menu p-4 gap-1">
+                  <li><a class="active">🏠 Dashboard</a></li>
+                  <li><a>👤 Profile</a></li>
+                </ul>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile Page -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4">👤 Profile Page</h2>
+      <div class="preview-frame">
+        <div class="preview-header">
+          <div class="preview-dot bg-red-400"></div>
+          <div class="preview-dot bg-yellow-400"></div>
+          <div class="preview-dot bg-green-400"></div>
+        </div>
+        <div class="preview-content p-6 bg-base-200">
+          <div class="max-w-2xl mx-auto">
+            <div class="mb-8">
+              <h1 class="text-3xl font-bold mb-2">Profile</h1>
+              <p class="text-base-content/70">Manage your account information.</p>
+            </div>
+            <div class="card bg-base-100 shadow-lg mb-6">
+              <div class="card-body">
+                <h2 class="card-title mb-4">👤 Account Information</h2>
+                <div>
+                  <label class="label"><span class="label-text font-medium">Email</span></label>
+                  <input type="email" value="user@example.com" class="input input-bordered w-full" disabled />
+                  <p class="label"><span class="label-text-alt text-base-content/60">Email cannot be changed</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="card bg-base-100 shadow-lg">
+              <div class="card-body">
+                <h2 class="card-title mb-4">✏️ Update Profile</h2>
+                <div class="alert alert-success mb-4">
+                  <span>✓ Profile updated successfully!</span>
+                </div>
+                <div class="mb-4">
+                  <label class="label"><span class="label-text font-medium">Display Name</span></label>
+                  <input type="text" placeholder="Enter your name" class="input input-bordered w-full" />
+                  <p class="label"><span class="label-text-alt text-base-content/60">Max 100 characters</span></p>
+                </div>
+                <div class="pt-4">
+                  <button class="btn btn-primary">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-8 text-base-content/60">
+      <p>Made with ❤️ using SvelteKit</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+    }
+  </script>
+</body>
+</html>

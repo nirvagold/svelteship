@@ -32,7 +32,7 @@ By participating in this project, you agree to maintain a respectful and inclusi
 
 2. **Clone your fork**
    ```bash
-   git clone https://github.com/your-username/svelteship.git
+   git clone https://github.com/nirvagold/svelteship.git
    cd svelteship
    ```
 
@@ -228,8 +228,8 @@ Include:
 
 ## Questions?
 
-- Open a [GitHub Discussion](https://github.com/your-username/svelteship/discussions) for questions
-- Open an [Issue](https://github.com/your-username/svelteship/issues) for bugs or feature requests
+- Open a [GitHub Discussion](https://github.com/nirvagold/svelteship/discussions) for questions
+- Open an [Issue](https://github.com/nirvagold/svelteship/issues) for bugs or feature requests
 
 ---
 
