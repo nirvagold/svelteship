@@ -190,10 +190,9 @@ test.describe('Theme Toggle', () => {
     // Wait for page to load
     await page.waitForLoadState('networkidle');
     
-    // Check localStorage for theme
-    const theme = await page.evaluate(() => localStorage.getItem('theme'));
+    // Check localStorage for theme - theme might be null initially, that's okay
+    const _theme = await page.evaluate(() => localStorage.getItem('theme'));
     
-    // Theme might be null initially, that's okay
     // The important thing is the page loads without errors
     expect(true).toBe(true);
   });

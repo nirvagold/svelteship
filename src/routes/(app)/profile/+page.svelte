@@ -4,7 +4,7 @@
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
-	let nameValue = $state('');
+	let nameValue = $derived(data.user.name || '');
 	let loading = $state(false);
 	let uploadLoading = $state(false);
 	let activeTab = $state<'info' | 'avatar'>('info');
@@ -12,11 +12,6 @@
 	let selectedFile = $state<File | null>(null);
 	let showEditModal = $state(false);
 	let fileInputRef = $state<HTMLInputElement | null>(null);
-
-	// Initialize and sync nameValue when data changes
-	$effect(() => {
-		nameValue = data.user.name || '';
-	});
 
 	function handleFileSelect(event: Event) {
 		const input = event.target as HTMLInputElement;
@@ -271,7 +266,7 @@
 									type="text"
 									id="name"
 									name="name"
-									bind:value={nameValue}
+									value={nameValue}
 									placeholder="Enter your name"
 									class="input input-bordered w-full"
 									maxlength="100"
