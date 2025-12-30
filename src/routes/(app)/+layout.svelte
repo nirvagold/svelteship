@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import { page } from '$app/stores';
 
 	let { data, children } = $props();
 
@@ -8,22 +9,28 @@
 	function closeSidebar() {
 		sidebarOpen = false;
 	}
+
+	function isActive(path: string): boolean {
+		return $page.url.pathname === path;
+	}
 </script>
 
 <div class="drawer lg:drawer-open">
 	<input id="app-drawer" type="checkbox" class="drawer-toggle" bind:checked={sidebarOpen} />
 
 	<!-- Main Content -->
-	<div class="drawer-content flex flex-col">
-		<!-- Mobile Navbar -->
-		<div class="navbar bg-base-100 lg:hidden border-b border-base-300">
+	<div class="drawer-content flex flex-col bg-base-200 min-h-screen">
+		<!-- Mobile Navbar (Sticky) -->
+		<div
+			class="navbar bg-base-100 lg:hidden border-b border-base-300 min-h-0 px-2 py-1 sticky top-0 z-30"
+		>
 			<div class="flex-none">
-				<label for="app-drawer" class="btn btn-square btn-ghost" aria-label="Open menu">
+				<label for="app-drawer" class="btn btn-ghost btn-sm btn-square" aria-label="Open menu">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
-						class="inline-block h-6 w-6 stroke-current"
+						class="inline-block h-5 w-5 stroke-current"
 					>
 						<path
 							stroke-linecap="round"
@@ -35,59 +42,38 @@
 				</label>
 			</div>
 			<div class="flex-1">
-				<a href="/dashboard" class="btn btn-ghost text-xl">Svelteship</a>
+				<a href="/dashboard" class="btn btn-ghost btn-sm text-base">🚀 Svelteship</a>
 			</div>
 			<div class="flex-none flex items-center gap-1">
 				<ThemeToggle />
-				<div class="dropdown dropdown-end">
-					<div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar placeholder">
-						<div class="bg-neutral text-neutral-content w-10 rounded-full">
-							<span class="text-sm">{data.user.name?.[0]?.toUpperCase() || data.user.email[0].toUpperCase()}</span>
-						</div>
-					</div>
-					<ul
-						role="menu"
-						class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-					>
-						<li class="menu-title">
-							<span>{data.user.name || data.user.email}</span>
-						</li>
-						<li><a href="/profile">Profile</a></li>
-						<li>
-							<form action="/logout" method="POST">
-								<button type="submit" class="w-full text-left">Logout</button>
-							</form>
-						</li>
-					</ul>
-				</div>
 			</div>
 		</div>
 
 		<!-- Page Content -->
-		<main class="flex-1 p-4 lg:p-6">
+		<main class="flex-1 p-4 lg:p-6 overflow-y-auto">
 			{@render children()}
 		</main>
 	</div>
 
 	<!-- Sidebar -->
 	<div class="drawer-side z-40">
-		<button
-			type="button"
-			aria-label="Close menu"
-			class="drawer-overlay"
-			onclick={closeSidebar}
-			onkeydown={(e) => e.key === 'Enter' && closeSidebar()}
-		></button>
-		<aside class="bg-base-100 min-h-screen w-64 border-r border-base-300">
-			<!-- Sidebar Header -->
-			<div class="p-4 border-b border-base-300">
-				<a href="/dashboard" class="text-xl font-bold">Svelteship</a>
+		<label for="app-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+		<aside class="bg-base-100 w-64 min-h-full flex flex-col border-r border-base-300">
+			<!-- Logo -->
+			<div class="p-3 border-b border-base-300">
+				<a href="/dashboard" class="text-lg font-bold">🚀 Svelteship</a>
 			</div>
 
-			<!-- Navigation Menu -->
-			<ul class="menu p-4 gap-1">
-				<li>
-					<a href="/dashboard" onclick={closeSidebar}>
+			<!-- Menu -->
+			<ul class="menu p-2 gap-1 flex-1 w-full">
+				<li class="w-full">
+					<a
+						href="/dashboard"
+						onclick={closeSidebar}
+						class="w-full {isActive('/dashboard')
+							? 'active bg-primary text-primary-content'
+							: ''}"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -105,8 +91,14 @@
 						Dashboard
 					</a>
 				</li>
-				<li>
-					<a href="/profile" onclick={closeSidebar}>
+				<li class="w-full">
+					<a
+						href="/profile"
+						onclick={closeSidebar}
+						class="w-full {isActive('/profile')
+							? 'active bg-primary text-primary-content'
+							: ''}"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -126,28 +118,40 @@
 				</li>
 			</ul>
 
-			<!-- User Section at Bottom -->
-			<div class="absolute bottom-0 left-0 right-0 p-4 border-t border-base-300">
-				<div class="flex items-center gap-3">
+			<!-- User Section -->
+			<div class="p-3 border-t border-base-300">
+				<div class="flex items-center gap-2">
 					<div class="avatar placeholder">
-						<div class="bg-neutral text-neutral-content w-10 rounded-full">
-							<span class="text-sm">{data.user.name?.[0]?.toUpperCase() || data.user.email[0].toUpperCase()}</span>
+						<div
+							class="bg-primary text-primary-content w-8 h-8 rounded-full text-xs flex items-center justify-center"
+						>
+							{#if data.user.avatarUrl}
+								<img
+									src={data.user.avatarUrl}
+									alt="Profile"
+									class="w-full h-full rounded-full object-cover"
+								/>
+							{:else}
+								<span
+									>{data.user.name?.[0]?.toUpperCase() || data.user.email[0].toUpperCase()}</span
+								>
+							{/if}
 						</div>
 					</div>
 					<div class="flex-1 min-w-0">
-						<p class="text-sm font-medium truncate">{data.user.name || 'User'}</p>
-						<p class="text-xs text-base-content/60 truncate">{data.user.email}</p>
+						<p class="text-xs font-medium truncate">{data.user.name || 'User'}</p>
+						<p class="text-xs text-base-content/50 truncate">{data.user.email}</p>
 					</div>
 					<ThemeToggle />
 					<form action="/logout" method="POST">
-						<button type="submit" class="btn btn-ghost btn-sm btn-square" aria-label="Logout">
+						<button type="submit" class="btn btn-ghost btn-xs btn-square" aria-label="Logout">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"
 								viewBox="0 0 24 24"
 								stroke-width="1.5"
 								stroke="currentColor"
-								class="w-5 h-5"
+								class="w-4 h-4"
 							>
 								<path
 									stroke-linecap="round"

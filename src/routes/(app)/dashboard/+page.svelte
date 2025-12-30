@@ -9,7 +9,7 @@
 	<title>Dashboard | Svelteship</title>
 </svelte:head>
 
-<div class="max-w-4xl mx-auto">
+<div>
 	<!-- Welcome Section -->
 	<div class="mb-8">
 		<h1 class="text-3xl font-bold mb-2">Welcome back, {displayName}!</h1>
