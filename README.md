@@ -46,9 +46,10 @@
 
 ### UI & Styling
 - 🎨 **Tailwind CSS 4** - Utility-first CSS framework
-- 🌸 **DaisyUI** - Beautiful component library
-- 🌓 **Dark Mode** - Theme toggle with persistence
+- 🌸 **DaisyUI** - Beautiful component library (32+ themes)
+- 🌓 **Theme Selector** - Full theme support with persistence
 - 📱 **Responsive** - Mobile-first design
+- 🧩 **Layout Components** - Sidebar, Topbar, Centered, Split layouts
 
 ### Developer Experience
 - 📝 **TypeScript** - Full type safety
@@ -114,17 +115,25 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 svelteship/
 ├── src/
 │   ├── lib/
-│   │   ├── components/       # Reusable Svelte components
-│   │   │   ├── ui/           # UI primitives (Button, Input, Card, Alert)
-│   │   │   └── ThemeToggle.svelte
-│   │   ├── server/           # Server-only code
-│   │   │   ├── db/           # Database client & schema
-│   │   │   └── auth.ts       # Lucia configuration
-│   │   └── utils/            # Shared utilities
+│   │   ├── components/
+│   │   │   ├── ui/           # UI primitives (Button, Modal, Toast, etc.)
+│   │   │   └── layouts/      # Layout components (Sidebar, Topbar, etc.)
+│   │   ├── hooks/            # Svelte hooks (useDebounce, useForm, etc.)
+│   │   ├── utils/            # Shared utilities (date, currency, etc.)
+│   │   └── server/           # Server-only code
+│   │       ├── db/           # Database client & schema
+│   │       └── auth.ts       # Lucia configuration
 │   ├── routes/
 │   │   ├── (auth)/           # Auth pages (login, register, logout)
-│   │   ├── (app)/            # Protected pages (dashboard, profile)
+│   │   ├── (app)/            # Protected pages (dashboard, profile, settings)
+│   │   ├── docs/             # Component documentation
 │   │   └── +page.svelte      # Landing page
+│   ├── examples/             # Optional features (copy if needed)
+│   │   ├── notifications/    # Notification system
+│   │   ├── onboarding/       # Onboarding wizard
+│   │   ├── admin/            # Admin dashboard
+│   │   ├── sessions/         # Session management
+│   │   └── security/         # Password change, 2FA
 │   └── hooks.server.ts       # Session validation middleware
 ├── drizzle/                  # Database migrations
 ├── e2e/                      # Playwright E2E tests
@@ -247,56 +256,98 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 Pre-built components in `src/lib/components/ui/`:
 
-### Button
+### Available Components
+
+| Component | Description |
+|-----------|-------------|
+| Button | Buttons with variants, sizes, loading state |
+| Modal | Dialog with backdrop, sizes, close button |
+| Toast | Notification toasts with auto-dismiss |
+| ConfirmDialog | Confirmation dialogs with callbacks |
+| Dropdown | Dropdown menus with keyboard navigation |
+| Tabs | Tab navigation with panels |
+| Accordion | Collapsible content sections |
+| Table | Data tables with sorting |
+| Pagination | Page navigation with ellipsis |
+| Tooltip | Hover tooltips with positions |
+| Badge | Status badges with variants |
+| Avatar | User avatars with fallback |
+| Progress | Progress bars with animation |
+| Spinner | Loading spinners |
+| Skeleton | Loading placeholders |
+| Breadcrumb | Navigation breadcrumbs |
+
+### Layout Components
+
+Layout components in `src/lib/components/layouts/`:
 
 ```svelte
 <script>
-  import { Button } from '$lib/components/ui';
+  import { SidebarLayout, TopbarLayout, CenteredLayout, SplitLayout } from '$lib/components/layouts';
 </script>
 
-<Button variant="primary" size="md">Click me</Button>
-<Button variant="danger" loading={true}>Loading...</Button>
+<!-- Sidebar navigation -->
+<SidebarLayout navItems={items} collapsible>
+  <main>Content</main>
+</SidebarLayout>
+
+<!-- Top navigation bar -->
+<TopbarLayout navItems={items} sticky>
+  <main>Content</main>
+</TopbarLayout>
+
+<!-- Centered content (auth pages) -->
+<CenteredLayout size="md" background="gradient">
+  <div class="card">Login form</div>
+</CenteredLayout>
+
+<!-- Two-column layout -->
+<SplitLayout ratio="1/2">
+  {#snippet left()}<aside>Sidebar</aside>{/snippet}
+  {#snippet right()}<main>Content</main>{/snippet}
+</SplitLayout>
 ```
 
-**Props:** `variant` (primary/secondary/danger/ghost), `size` (sm/md/lg), `loading`, `disabled`
-
-### Input
+### Theme Selector
 
 ```svelte
 <script>
-  import { Input } from '$lib/components/ui';
+  import ThemeSelector from '$lib/components/ThemeSelector.svelte';
 </script>
 
-<Input type="email" label="Email" error="Invalid email" bind:value={email} />
+<ThemeSelector showLabel size="sm" />
 ```
 
-**Props:** `type` (text/email/password), `label`, `error`, `value`
+---
 
-### Card
+## 📦 Examples
 
-```svelte
-<script>
-  import { Card } from '$lib/components/ui';
-</script>
+Svelteship includes optional features in `src/examples/` that you can copy into your project:
 
-<Card title="Card Title">
-  Card content goes here
-</Card>
+| Example | Description |
+|---------|-------------|
+| `notifications/` | Full notification system with database |
+| `onboarding/` | Multi-step onboarding wizard |
+| `admin/` | Admin dashboard with role-based access |
+| `sessions/` | Session management UI |
+| `security/` | Password change, 2FA settings |
+
+### Using Examples
+
+1. Copy the example folder to your routes
+2. Follow the README in each example
+3. Add required database schema if needed
+
+```bash
+# Example: Add notifications
+cp -r src/examples/notifications src/routes/(app)/notifications
 ```
 
-**Props:** `title`
-
-### Alert
-
-```svelte
-<script>
-  import { Alert } from '$lib/components/ui';
-</script>
-
-<Alert variant="success" dismissible>Operation successful!</Alert>
-```
-
-**Props:** `variant` (success/error/warning/info), `dismissible`
+Each example includes:
+- `README.md` - Setup instructions
+- `+page.svelte` - Route component
+- `+page.server.ts` - Server logic
+- `schema.ts` - Database schema (if needed)
 
 ---
 

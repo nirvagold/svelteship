@@ -11,16 +11,21 @@ describe('Email Verification Properties', () => {
 
 		it('should only accept tokens within validity period', () => {
 			function isTokenValid(createdAt: Date, now: Date): boolean {
+				// Handle invalid dates
+				if (isNaN(createdAt.getTime()) || isNaN(now.getTime())) {
+					return false;
+				}
 				const expiresAt = new Date(createdAt.getTime() + TOKEN_EXPIRY_MS);
 				return now < expiresAt;
 			}
 
 			fc.assert(
 				fc.property(
-					fc.date({ min: new Date('2024-01-01'), max: new Date('2025-12-31') }),
+					fc.integer({ min: 1704067200000, max: 1735689600000 }), // 2024-01-01 to 2025-01-01 in ms
 					fc.integer({ min: 0, max: 48 * 60 * 60 * 1000 }), // 0 to 48 hours in ms
-					(createdAt, elapsedMs) => {
-						const now = new Date(createdAt.getTime() + elapsedMs);
+					(createdAtMs, elapsedMs) => {
+						const createdAt = new Date(createdAtMs);
+						const now = new Date(createdAtMs + elapsedMs);
 						const isValid = isTokenValid(createdAt, now);
 
 						if (elapsedMs < TOKEN_EXPIRY_MS) {
@@ -39,11 +44,15 @@ describe('Email Verification Properties', () => {
 			}
 
 			fc.assert(
-				fc.property(fc.date({ min: new Date('2024-01-01'), max: new Date('2025-12-31') }), (date) => {
-					// Token should be invalid exactly at expiry time
-					const isValid = isTokenValid(date, date);
-					expect(isValid).toBe(false);
-				})
+				fc.property(
+					fc.integer({ min: 1704067200000, max: 1735689600000 }), // 2024-01-01 to 2025-01-01 in ms
+					(timestamp) => {
+						const date = new Date(timestamp);
+						// Token should be invalid exactly at expiry time
+						const isValid = isTokenValid(date, date);
+						expect(isValid).toBe(false);
+					}
+				)
 			);
 		});
 
