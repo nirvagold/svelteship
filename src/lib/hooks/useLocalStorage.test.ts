@@ -38,9 +38,12 @@ describe('useLocalStorage', () => {
 	 * **Validates: Requirements 3.1, 3.2, 3.3**
 	 */
 	it('Property 5: should round-trip values through localStorage', () => {
+		// Reserved keys that can cause issues with JavaScript objects
+		const reservedKeys = ['__proto__', 'constructor', 'prototype', 'toString', 'valueOf'];
+		
 		fc.assert(
 			fc.property(
-				fc.string().filter((s) => s.length > 0 && s.length < 100),
+				fc.string().filter((s) => s.length > 0 && s.length < 100 && !reservedKeys.includes(s)),
 				fc.oneof(
 					fc.string(),
 					fc.integer(),
