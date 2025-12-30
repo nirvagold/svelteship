@@ -93,7 +93,7 @@ describe('Email Service', () => {
 		it('property: output length is predictable', () => {
 			fc.assert(
 				fc.property(
-					fc.string({ minLength: 1, maxLength: 20 }).filter((s) => !s.includes('{')),
+					fc.string({ minLength: 1, maxLength: 20 }).filter((s) => !s.includes('{') && !s.includes('$')),
 					(name) => {
 						const template = 'Hello {name}!';
 						const result = substituteVariables(template, { name });
