@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="nord">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,89 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
     .preview-frame {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+      background: white;
     }
     .preview-header {
-      background: #f3f4f6;
-      padding: 8px 12px;
+      background: linear-gradient(90deg, #e5e7eb 0%, #f3f4f6 100%);
+      padding: 12px 16px;
       display: flex;
-      gap: 6px;
+      align-items: center;
+      gap: 8px;
       border-bottom: 1px solid #e5e7eb;
+    }
+    .preview-dots {
+      display: flex;
+      gap: 8px;
     }
     .preview-dot {
       width: 12px;
       height: 12px;
       border-radius: 50%;
     }
-    .preview-content {
-      background: #f5f5f5;
+    .preview-url {
+      flex: 1;
+      background: white;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #6b7280;
+      margin-left: 12px;
+    }
+    .section-title {
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      padding: 24px;
     }
   </style>
 </head>
-<body class="bg-base-200 min-h-screen p-8">
+<body class="p-8">
   <div class="max-w-6xl mx-auto">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4">🚀 Svelteship Preview</h1>
-      <p class="text-base-content/70">Interactive mockups of the boilerplate pages</p>
-      <div class="flex justify-center gap-4 mt-4">
-        <a href="https://github.com/nirvagold/svelteship" class="btn btn-primary">View on GitHub</a>
-        <button onclick="toggleTheme()" class="btn btn-outline">Toggle Theme</button>
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <div class="glass-card inline-block mb-8 px-8 py-6">
+        <h1 class="text-5xl font-bold text-white mb-4">🚀 Svelteship</h1>
+        <p class="text-white/80 text-lg">Interactive preview of the boilerplate pages</p>
+      </div>
+      <div class="flex justify-center gap-4">
+        <a href="https://github.com/nirvagold/svelteship" class="btn btn-lg bg-white text-purple-600 hover:bg-white/90 border-0">
+          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <button onclick="toggleTheme()" class="btn btn-lg bg-white/20 text-white hover:bg-white/30 border-0">
+          🌙 Toggle Theme
+        </button>
       </div>
     </div>
 
     <!-- Landing Page -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">🏠 Landing Page</h2>
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
+        <span class="bg-white/20 p-2 rounded-lg">🏠</span> Landing Page
+      </h2>
       <div class="preview-frame">
         <div class="preview-header">
-          <div class="preview-dot bg-red-400"></div>
-          <div class="preview-dot bg-yellow-400"></div>
-          <div class="preview-dot bg-green-400"></div>
+          <div class="preview-dots">
+            <div class="preview-dot bg-red-400"></div>
+            <div class="preview-dot bg-yellow-400"></div>
+            <div class="preview-dot bg-green-400"></div>
+          </div>
+          <div class="preview-url">localhost:5173</div>
         </div>
-        <div class="preview-content">
+        <div data-theme="nord">
           <div class="hero min-h-[500px] bg-base-200">
             <div class="hero-content text-center">
               <div class="max-w-2xl">
@@ -94,15 +133,20 @@
     </section>
 
     <!-- Login Page -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">🔑 Login Page</h2>
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
+        <span class="bg-white/20 p-2 rounded-lg">🔑</span> Login Page
+      </h2>
       <div class="preview-frame">
         <div class="preview-header">
-          <div class="preview-dot bg-red-400"></div>
-          <div class="preview-dot bg-yellow-400"></div>
-          <div class="preview-dot bg-green-400"></div>
+          <div class="preview-dots">
+            <div class="preview-dot bg-red-400"></div>
+            <div class="preview-dot bg-yellow-400"></div>
+            <div class="preview-dot bg-green-400"></div>
+          </div>
+          <div class="preview-url">localhost:5173/login</div>
         </div>
-        <div class="preview-content p-8 flex justify-center bg-base-200">
+        <div data-theme="nord" class="p-8 flex justify-center bg-base-200 min-h-[400px] items-center">
           <div class="card bg-base-100 shadow-xl w-full max-w-md">
             <div class="card-body">
               <h1 class="card-title text-2xl font-bold justify-center mb-2">Welcome Back</h1>
@@ -113,7 +157,7 @@
               </div>
               <div class="form-control mb-6">
                 <label class="label"><span class="label-text">Password</span></label>
-                <input type="password" placeholder="Enter your password" class="input input-bordered w-full" />
+                <input type="password" placeholder="Enter your password" class="input input-bordered w-full" value="password123" />
               </div>
               <button class="btn btn-primary w-full">Sign In</button>
               <div class="divider">OR</div>
@@ -127,107 +171,120 @@
     </section>
 
     <!-- Dashboard -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">📊 Dashboard</h2>
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
+        <span class="bg-white/20 p-2 rounded-lg">📊</span> Dashboard
+      </h2>
       <div class="preview-frame">
         <div class="preview-header">
-          <div class="preview-dot bg-red-400"></div>
-          <div class="preview-dot bg-yellow-400"></div>
-          <div class="preview-dot bg-green-400"></div>
+          <div class="preview-dots">
+            <div class="preview-dot bg-red-400"></div>
+            <div class="preview-dot bg-yellow-400"></div>
+            <div class="preview-dot bg-green-400"></div>
+          </div>
+          <div class="preview-url">localhost:5173/dashboard</div>
         </div>
-        <div class="preview-content">
-          <div class="drawer lg:drawer-open">
-            <input id="preview-drawer" type="checkbox" class="drawer-toggle" />
-            <div class="drawer-content flex flex-col">
-              <div class="navbar bg-base-100 lg:hidden border-b border-base-300">
-                <div class="flex-none">
-                  <label for="preview-drawer" class="btn btn-square btn-ghost">☰</label>
-                </div>
-                <div class="flex-1"><span class="btn btn-ghost text-xl">Svelteship</span></div>
+        <div data-theme="nord">
+          <div class="flex">
+            <!-- Sidebar -->
+            <aside class="bg-base-100 min-h-[500px] w-64 border-r border-base-300 hidden md:block">
+              <div class="p-4 border-b border-base-300">
+                <span class="text-xl font-bold">🚀 Svelteship</span>
               </div>
-              <main class="flex-1 p-6 bg-base-200">
-                <div class="max-w-4xl mx-auto">
-                  <div class="mb-8">
-                    <h1 class="text-3xl font-bold mb-2">Welcome back, User!</h1>
-                    <p class="text-base-content/70">Here's what's happening with your account.</p>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                    <div class="stat bg-base-100 rounded-box shadow">
-                      <div class="stat-title">Account Status</div>
-                      <div class="stat-value text-primary text-2xl">Active</div>
-                      <div class="stat-desc">Your account is in good standing</div>
-                    </div>
-                    <div class="stat bg-base-100 rounded-box shadow">
-                      <div class="stat-title">Security</div>
-                      <div class="stat-value text-secondary text-2xl">Secure</div>
-                      <div class="stat-desc">Session authenticated</div>
-                    </div>
-                    <div class="stat bg-base-100 rounded-box shadow">
-                      <div class="stat-title">Stack</div>
-                      <div class="stat-value text-accent text-2xl">Ready</div>
-                      <div class="stat-desc">SvelteKit + Lucia + Drizzle</div>
+              <ul class="menu p-4 gap-1">
+                <li><a class="active bg-primary/10 text-primary">🏠 Dashboard</a></li>
+                <li><a>👤 Profile</a></li>
+              </ul>
+              <div class="absolute bottom-4 left-4 right-4 p-4 border-t border-base-300">
+                <div class="flex items-center gap-3">
+                  <div class="avatar placeholder">
+                    <div class="bg-primary text-primary-content w-10 rounded-full">
+                      <span>U</span>
                     </div>
                   </div>
-                  <div class="card bg-base-100 shadow-lg">
-                    <div class="card-body">
-                      <h2 class="card-title mb-4">💡 Getting Started</h2>
-                      <div class="space-y-4">
-                        <div class="flex gap-4 items-start">
-                          <div class="badge badge-primary badge-lg">1</div>
-                          <div>
-                            <h3 class="font-semibold">Customize your profile</h3>
-                            <p class="text-base-content/70 text-sm">Add your name and personalize your account settings.</p>
-                          </div>
+                  <div>
+                    <p class="text-sm font-medium">User</p>
+                    <p class="text-xs text-base-content/60">user@example.com</p>
+                  </div>
+                </div>
+              </div>
+            </aside>
+            <!-- Main Content -->
+            <main class="flex-1 p-6 bg-base-200">
+              <div class="max-w-4xl">
+                <div class="mb-8">
+                  <h1 class="text-3xl font-bold mb-2">Welcome back, User!</h1>
+                  <p class="text-base-content/70">Here's what's happening with your account.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                  <div class="stat bg-base-100 rounded-box shadow">
+                    <div class="stat-title">Account Status</div>
+                    <div class="stat-value text-primary text-2xl">Active</div>
+                    <div class="stat-desc">Your account is in good standing</div>
+                  </div>
+                  <div class="stat bg-base-100 rounded-box shadow">
+                    <div class="stat-title">Security</div>
+                    <div class="stat-value text-secondary text-2xl">Secure</div>
+                    <div class="stat-desc">Session authenticated</div>
+                  </div>
+                  <div class="stat bg-base-100 rounded-box shadow">
+                    <div class="stat-title">Stack</div>
+                    <div class="stat-value text-accent text-2xl">Ready</div>
+                    <div class="stat-desc">SvelteKit + Lucia + Drizzle</div>
+                  </div>
+                </div>
+                <div class="card bg-base-100 shadow-lg">
+                  <div class="card-body">
+                    <h2 class="card-title mb-4">� uGetting Started</h2>
+                    <div class="space-y-4">
+                      <div class="flex gap-4 items-start">
+                        <div class="badge badge-primary badge-lg">1</div>
+                        <div>
+                          <h3 class="font-semibold">Customize your profile</h3>
+                          <p class="text-base-content/70 text-sm">Add your name and personalize your account.</p>
                         </div>
-                        <div class="divider my-2"></div>
-                        <div class="flex gap-4 items-start">
-                          <div class="badge badge-primary badge-lg">2</div>
-                          <div>
-                            <h3 class="font-semibold">Explore the codebase</h3>
-                            <p class="text-base-content/70 text-sm">Check out the project structure.</p>
-                          </div>
+                      </div>
+                      <div class="divider my-2"></div>
+                      <div class="flex gap-4 items-start">
+                        <div class="badge badge-primary badge-lg">2</div>
+                        <div>
+                          <h3 class="font-semibold">Explore the codebase</h3>
+                          <p class="text-base-content/70 text-sm">Check out the project structure.</p>
                         </div>
-                        <div class="divider my-2"></div>
-                        <div class="flex gap-4 items-start">
-                          <div class="badge badge-primary badge-lg">3</div>
-                          <div>
-                            <h3 class="font-semibold">Build your features</h3>
-                            <p class="text-base-content/70 text-sm">Start adding your own routes and components.</p>
-                          </div>
+                      </div>
+                      <div class="divider my-2"></div>
+                      <div class="flex gap-4 items-start">
+                        <div class="badge badge-primary badge-lg">3</div>
+                        <div>
+                          <h3 class="font-semibold">Build your features</h3>
+                          <p class="text-base-content/70 text-sm">Start adding your own routes and components.</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </main>
-            </div>
-            <div class="drawer-side">
-              <label for="preview-drawer" class="drawer-overlay"></label>
-              <aside class="bg-base-100 min-h-full w-64 border-r border-base-300">
-                <div class="p-4 border-b border-base-300">
-                  <span class="text-xl font-bold">Svelteship</span>
-                </div>
-                <ul class="menu p-4 gap-1">
-                  <li><a class="active">🏠 Dashboard</a></li>
-                  <li><a>👤 Profile</a></li>
-                </ul>
-              </aside>
-            </div>
+              </div>
+            </main>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Profile Page -->
-    <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-4">👤 Profile Page</h2>
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
+        <span class="bg-white/20 p-2 rounded-lg">👤</span> Profile Page
+      </h2>
       <div class="preview-frame">
         <div class="preview-header">
-          <div class="preview-dot bg-red-400"></div>
-          <div class="preview-dot bg-yellow-400"></div>
-          <div class="preview-dot bg-green-400"></div>
+          <div class="preview-dots">
+            <div class="preview-dot bg-red-400"></div>
+            <div class="preview-dot bg-yellow-400"></div>
+            <div class="preview-dot bg-green-400"></div>
+          </div>
+          <div class="preview-url">localhost:5173/profile</div>
         </div>
-        <div class="preview-content p-6 bg-base-200">
+        <div data-theme="nord" class="p-6 bg-base-200 min-h-[450px]">
           <div class="max-w-2xl mx-auto">
             <div class="mb-8">
               <h1 class="text-3xl font-bold mb-2">Profile</h1>
@@ -238,7 +295,7 @@
                 <h2 class="card-title mb-4">👤 Account Information</h2>
                 <div>
                   <label class="label"><span class="label-text font-medium">Email</span></label>
-                  <input type="email" value="user@example.com" class="input input-bordered w-full" disabled />
+                  <input type="email" value="user@example.com" class="input input-bordered w-full bg-base-200" disabled />
                   <p class="label"><span class="label-text-alt text-base-content/60">Email cannot be changed</span></p>
                 </div>
               </div>
@@ -247,11 +304,12 @@
               <div class="card-body">
                 <h2 class="card-title mb-4">✏️ Update Profile</h2>
                 <div class="alert alert-success mb-4">
-                  <span>✓ Profile updated successfully!</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span>Profile updated successfully!</span>
                 </div>
                 <div class="mb-4">
                   <label class="label"><span class="label-text font-medium">Display Name</span></label>
-                  <input type="text" placeholder="Enter your name" class="input input-bordered w-full" />
+                  <input type="text" placeholder="Enter your name" value="John Doe" class="input input-bordered w-full" />
                   <p class="label"><span class="label-text-alt text-base-content/60">Max 100 characters</span></p>
                 </div>
                 <div class="pt-4">
@@ -264,16 +322,26 @@
       </div>
     </section>
 
-    <footer class="text-center py-8 text-base-content/60">
-      <p>Made with ❤️ using SvelteKit</p>
+    <!-- Footer -->
+    <footer class="text-center py-12">
+      <div class="glass-card inline-block px-8 py-4">
+        <p class="text-white/80">Made with ❤️ using SvelteKit</p>
+        <p class="text-white/60 text-sm mt-2">© 2025 Svelteship</p>
+      </div>
     </footer>
   </div>
 
   <script>
+    const themes = ['nord', 'cupcake', 'emerald', 'corporate'];
+    let currentTheme = 0;
+    
     function toggleTheme() {
-      const html = document.documentElement;
-      const currentTheme = html.getAttribute('data-theme');
-      html.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+      currentTheme = (currentTheme + 1) % themes.length;
+      document.querySelectorAll('[data-theme]').forEach(el => {
+        if (el !== document.documentElement) {
+          el.setAttribute('data-theme', themes[currentTheme]);
+        }
+      });
     }
   </script>
 </body>
