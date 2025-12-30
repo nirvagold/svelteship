@@ -1,14 +1,9 @@
 <script lang="ts">
-	import type { LayoutData } from './$types';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 
 	let { data, children } = $props();
 
 	let sidebarOpen = $state(false);
-
-	function toggleSidebar() {
-		sidebarOpen = !sidebarOpen;
-	}
 
 	function closeSidebar() {
 		sidebarOpen = false;

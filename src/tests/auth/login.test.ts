@@ -114,7 +114,7 @@ describe('Login Property Tests', () => {
 
 		it('session is created for user with matching email', async () => {
 			await fc.assert(
-				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, password) => {
+				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, _password) => {
 					const normalizedEmail = email.toLowerCase().trim();
 					
 					// Setup: User exists
@@ -155,7 +155,7 @@ describe('Login Property Tests', () => {
 	describe('Property 5: Login fails with incorrect credentials (security)', () => {
 		it('non-existent email returns generic error (Requirements 3.3)', async () => {
 			await fc.assert(
-				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, password) => {
+				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, _password) => {
 					// Setup: User does NOT exist
 					mockDb.query.users.findFirst.mockResolvedValue(null);
 
@@ -224,7 +224,7 @@ describe('Login Property Tests', () => {
 
 		it('error messages are identical for non-existent email and wrong password', async () => {
 			await fc.assert(
-				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, password) => {
+				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, _password) => {
 					const emailValidation = validateEmail(email);
 					if (!emailValidation.valid) {
 						return true;
@@ -246,7 +246,7 @@ describe('Login Property Tests', () => {
 					mockVerify.mockResolvedValue(false);
 					
 					const user2 = await mockDb.query.users.findFirst();
-					const validPassword = await mockVerify(user2!.passwordHash, password);
+					const validPassword = await mockVerify(user2!.passwordHash, 'wrong-password');
 					const error2 = !validPassword ? INVALID_CREDENTIALS_ERROR : null;
 
 					// Both errors should be identical (security requirement)
@@ -261,7 +261,7 @@ describe('Login Property Tests', () => {
 
 		it('no session is created for failed login attempts', async () => {
 			await fc.assert(
-				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, password) => {
+				fc.asyncProperty(validEmailArb, validPasswordArb, async (email, _password) => {
 					// Reset mock call counts
 					mockLucia.createSession.mockClear();
 

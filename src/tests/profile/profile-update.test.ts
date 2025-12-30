@@ -9,7 +9,6 @@ import * as fc from 'fast-check';
 import { validateName } from '$lib/utils/validation';
 
 // Mock the database module
-const mockUpdate = vi.fn();
 const mockSet = vi.fn();
 const mockWhere = vi.fn();
 
@@ -113,7 +112,7 @@ describe('Profile Update Property Tests', () => {
 
 		it('empty string name is treated as null', async () => {
 			await fc.assert(
-				fc.asyncProperty(mockUserArb, async (user) => {
+				fc.asyncProperty(mockUserArb, async (_user) => {
 					// Reset mocks
 					vi.clearAllMocks();
 					mockDb.update.mockReturnValue({
@@ -132,7 +131,7 @@ describe('Profile Update Property Tests', () => {
 					await mockDb.update().set({
 						name: trimmedName,
 						updatedAt: expect.any(Date)
-					}).where({ field: 'users.id', value: user.id });
+					}).where({ field: 'users.id', value: _user.id });
 
 					// Verify name is set to null
 					expect(mockSet).toHaveBeenCalledWith(
