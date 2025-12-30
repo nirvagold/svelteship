@@ -46,7 +46,10 @@
 				</label>
 			</div>
 			<div class="flex-1">
-				<a href="/dashboard" class="btn btn-ghost btn-sm text-base">🚀 Svelteship</a>
+				<a href="/dashboard" class="btn btn-ghost text-lg font-bold">
+					<span class="text-xl">🚀</span>
+					Svelteship
+				</a>
 			</div>
 			<div class="flex-none flex items-center gap-1">
 				<ThemeToggle />
@@ -64,8 +67,11 @@
 		<label for="app-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
 		<aside class="bg-base-100 w-64 min-h-full flex flex-col border-r border-base-300">
 			<!-- Logo -->
-			<div class="p-3 border-b border-base-300">
-				<a href="/dashboard" class="text-lg font-bold">🚀 Svelteship</a>
+			<div class="p-4 border-b border-base-300">
+				<a href="/dashboard" class="text-xl font-bold flex items-center gap-2">
+					<span class="text-2xl">🚀</span>
+					Svelteship
+				</a>
 			</div>
 
 			<!-- Menu -->
