@@ -6,7 +6,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?logo=postgresql)](https://www.postgresql.org/)
 
-**Production-ready SvelteKit boilerplate** with authentication, database, and UI components. Ship modern web applications quickly and securely.
+**Production-ready SvelteKit boilerplate** with authentication, database, UI components, and advanced features. Ship modern web applications quickly and securely.
 
 [Preview](https://nirvagold.github.io/svelteship/preview/) · [Documentation](#documentation) · [Report Bug](https://github.com/nirvagold/svelteship/issues) · [Request Feature](https://github.com/nirvagold/svelteship/issues)
 
@@ -23,6 +23,7 @@
 - [Database](#-database)
 - [Authentication](#-authentication)
 - [UI Components](#-ui-components)
+- [Advanced Features](#-advanced-features)
 - [Testing](#-testing)
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
@@ -34,9 +35,12 @@
 
 ### Authentication & Security
 - 🔐 **Complete Auth System** - Register, login, logout with session management
-- �️ **Securee Sessions** - HTTP-only cookies with secure flags
+- �  **OAuth Integration** - Google and GitHub social login
+- �️ *P*Secure Sessions** - HTTP-only cookies with secure flags
 - 🔒 **Password Hashing** - Argon2 algorithm for maximum security
 - 🚪 **Protected Routes** - Automatic redirect for unauthenticated users
+- � **Email rVerification** - Verify user emails with tokens
+- � **Passwlord Reset** - Secure password recovery flow
 
 ### Database & ORM
 - 🗄️ **PostgreSQL** - Robust relational database
@@ -48,18 +52,29 @@
 - 🎨 **Tailwind CSS 4** - Utility-first CSS framework
 - 🌸 **DaisyUI** - Beautiful component library (32+ themes)
 - 🌓 **Theme Selector** - Full theme support with persistence
-- 📱 **Responsive** - Mobile-first design
+- �  **Responsive** - Mobile-first design
 - 🧩 **Layout Components** - Sidebar, Topbar, Centered, Split layouts
+- 📝 **Form Components** - Input, Select, Checkbox, Radio, Textarea, DatePicker, FileInput
+
+### Advanced Features (v0.5.0)
+- 🌐 **Internationalization (i18n)** - Multi-language support (EN, ID)
+- 📧 **Email Service** - Resend integration with HTML templates
+- 📁 **File Storage** - Local, S3, and Cloudflare R2 support
+- 📡 **Real-time SSE** - Server-Sent Events for notifications
+- 📊 **Analytics** - Plausible, Umami, Google Analytics support
+- 📝 **Structured Logging** - JSON logging with Sentry integration
+- 📚 **API Documentation** - Interactive API docs page
+- 🛠️ **CLI Generator** - Generate components, routes, and APIs
 
 ### Developer Experience
 - 📝 **TypeScript** - Full type safety
 - ⚡ **Vite** - Lightning-fast HMR
-- 🧪 **Testing** - Unit, property-based, and E2E tests
-- 📦 **Pre-built Components** - Button, Input, Card, Alert
+- 🧪 **Testing** - Unit, property-based, and E2E tests (476+ tests)
+- 📦 **Pre-built Components** - 16+ UI components ready to use
 
 ---
 
-## 🛠️ Tech Stack
+## �️ Tecch Stack
 
 | Category | Technology |
 |----------|------------|
@@ -69,6 +84,8 @@
 | **Database** | [PostgreSQL 16](https://www.postgresql.org/) |
 | **ORM** | [Drizzle ORM](https://orm.drizzle.team/) |
 | **Authentication** | [Lucia Auth 3](https://lucia-auth.com/) |
+| **Email** | [Resend](https://resend.com/) |
+| **Storage** | Local / AWS S3 / Cloudflare R2 |
 | **Testing** | [Vitest](https://vitest.dev/) + [Playwright](https://playwright.dev/) + [fast-check](https://fast-check.dev/) |
 | **Container** | [Docker](https://www.docker.com/) |
 
@@ -117,15 +134,26 @@ svelteship/
 │   ├── lib/
 │   │   ├── components/
 │   │   │   ├── ui/           # UI primitives (Button, Modal, Toast, etc.)
+│   │   │   ├── forms/        # Form components (Input, Select, etc.)
 │   │   │   └── layouts/      # Layout components (Sidebar, Topbar, etc.)
-│   │   ├── hooks/            # Svelte hooks (useDebounce, useForm, etc.)
+│   │   ├── hooks/            # Svelte hooks (useDebounce, useForm, useSSE, etc.)
 │   │   ├── utils/            # Shared utilities (date, currency, etc.)
+│   │   ├── i18n/             # Internationalization (locales, translations)
+│   │   ├── analytics/        # Analytics integration
 │   │   └── server/           # Server-only code
 │   │       ├── db/           # Database client & schema
+│   │       ├── email/        # Email service & templates
+│   │       ├── storage/      # File storage (local, S3, R2)
+│   │       ├── oauth/        # OAuth providers (Google, GitHub)
+│   │       ├── logger.ts     # Structured logging
+│   │       ├── sse.ts        # Server-Sent Events
 │   │       └── auth.ts       # Lucia configuration
 │   ├── routes/
-│   │   ├── (auth)/           # Auth pages (login, register, logout)
+│   │   ├── (auth)/           # Auth pages (login, register, logout, oauth)
 │   │   ├── (app)/            # Protected pages (dashboard, profile, settings)
+│   │   ├── api/              # API endpoints
+│   │   │   ├── docs/         # Interactive API documentation
+│   │   │   └── notifications/# SSE notification stream
 │   │   ├── docs/             # Component documentation
 │   │   └── +page.svelte      # Landing page
 │   ├── examples/             # Optional features (copy if needed)
@@ -135,6 +163,8 @@ svelteship/
 │   │   ├── sessions/         # Session management
 │   │   └── security/         # Password change, 2FA
 │   └── hooks.server.ts       # Session validation middleware
+├── scripts/
+│   └── generate.ts           # CLI generator for components/routes/APIs
 ├── drizzle/                  # Database migrations
 ├── e2e/                      # Playwright E2E tests
 ├── static/                   # Static assets
@@ -159,44 +189,50 @@ svelteship/
 | `npm run db:generate` | Generate migrations |
 | `npm run db:migrate` | Run migrations |
 | `npm run db:studio` | Open Drizzle Studio |
+| `npm run generate` | CLI generator for components/routes/APIs |
 
 ---
 
 ## 🔧 Environment Variables
 
-Create a `.env` file in the root directory:
+Create a `.env` file in the root directory. See [.env.example](.env.example) for all available options:
 
 ```env
 # Database
 DATABASE_URL=postgres://svelteship:svelteship@localhost:5432/svelteship
-```
 
-See [.env.example](.env.example) for all available options.
+# OAuth (optional)
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+
+# Email (optional)
+EMAIL_PROVIDER=console  # or "resend"
+RESEND_API_KEY=
+
+# Storage (optional)
+STORAGE_PROVIDER=local  # or "s3", "r2"
+
+# Analytics (optional)
+ANALYTICS_PROVIDER=     # "plausible", "umami", "google", "custom"
+```
 
 ---
 
-## 🗄️ Database
+## �️ Database
 
 ### Schema
 
-The database includes two main tables:
+The database includes these main tables:
 
-**Users Table**
-| Column | Type | Description |
-|--------|------|-------------|
-| id | TEXT | Primary key (nanoid) |
-| email | TEXT | Unique email address |
-| password_hash | TEXT | Argon2 hashed password |
-| name | TEXT | Display name (optional) |
-| created_at | TIMESTAMP | Account creation time |
-| updated_at | TIMESTAMP | Last update time |
-
-**Sessions Table**
-| Column | Type | Description |
-|--------|------|-------------|
-| id | TEXT | Session token |
-| user_id | TEXT | Foreign key to users |
-| expires_at | TIMESTAMP | Session expiration |
+| Table | Description |
+|-------|-------------|
+| `users` | User accounts with email, password, preferences |
+| `sessions` | Active user sessions |
+| `oauth_accounts` | Linked OAuth providers (Google, GitHub) |
+| `email_verification_tokens` | Email verification tokens |
+| `password_reset_tokens` | Password reset tokens |
 
 ### Commands
 
@@ -228,35 +264,29 @@ Svelteship uses [Lucia Auth](https://lucia-auth.com/) for authentication.
 - **Registration** - Email/password with validation
 - **Login** - Secure session creation
 - **Logout** - Session invalidation
+- **OAuth** - Google and GitHub social login
+- **Email Verification** - Verify user emails
+- **Password Reset** - Secure recovery flow
 - **Protected Routes** - Automatic auth guards
 - **Session Refresh** - Automatic token renewal
 
-### Route Groups
+### OAuth Setup
 
-| Group | Path | Description |
-|-------|------|-------------|
-| `(auth)` | `/login`, `/register`, `/logout` | Public auth pages |
-| `(app)` | `/dashboard`, `/profile` | Protected pages |
-
-### Usage Example
-
-```typescript
-// Access user in +page.server.ts
-export const load: PageServerLoad = async ({ locals }) => {
-  if (!locals.user) {
-    redirect(302, '/login');
-  }
-  return { user: locals.user };
-};
-```
+1. Create OAuth app on [Google Cloud Console](https://console.cloud.google.com/apis/credentials) or [GitHub Developer Settings](https://github.com/settings/developers)
+2. Add credentials to `.env`:
+   ```env
+   GOOGLE_CLIENT_ID=your-client-id
+   GOOGLE_CLIENT_SECRET=your-client-secret
+   GITHUB_CLIENT_ID=your-client-id
+   GITHUB_CLIENT_SECRET=your-client-secret
+   ```
+3. OAuth buttons will appear on login page automatically
 
 ---
 
 ## 🎨 UI Components
 
-Pre-built components in `src/lib/components/ui/`:
-
-### Available Components
+### UI Primitives (`src/lib/components/ui/`)
 
 | Component | Description |
 |-----------|-------------|
@@ -277,9 +307,19 @@ Pre-built components in `src/lib/components/ui/`:
 | Skeleton | Loading placeholders |
 | Breadcrumb | Navigation breadcrumbs |
 
-### Layout Components
+### Form Components (`src/lib/components/forms/`)
 
-Layout components in `src/lib/components/layouts/`:
+| Component | Description |
+|-----------|-------------|
+| Input | Text input with label, error, helper text |
+| Select | Dropdown select with options |
+| Checkbox | Checkbox with label |
+| Radio | Radio group with options |
+| Textarea | Multi-line input with character count |
+| DatePicker | Date selection with min/max |
+| FileInput | File upload with drag-drop and preview |
+
+### Layout Components (`src/lib/components/layouts/`)
 
 ```svelte
 <script>
@@ -308,21 +348,98 @@ Layout components in `src/lib/components/layouts/`:
 </SplitLayout>
 ```
 
-### Theme Selector
+---
 
-```svelte
-<script>
-  import ThemeSelector from '$lib/components/ThemeSelector.svelte';
-</script>
+## 🚀 Advanced Features
 
-<ThemeSelector showLabel size="sm" />
+### Internationalization (i18n)
+
+```typescript
+import { t, locale, setLocale } from '$lib/i18n';
+
+// Get translation
+const greeting = t('common.welcome'); // "Welcome" or "Selamat Datang"
+
+// Change language
+setLocale('id'); // Switch to Indonesian
+
+// Format date/number by locale
+import { formatDate, formatNumber } from '$lib/i18n';
+formatDate(new Date()); // "December 30, 2024" or "30 Desember 2024"
+formatNumber(1234.56);  // "1,234.56" or "1.234,56"
+```
+
+### Email Service
+
+```typescript
+import { sendEmail } from '$lib/server/email';
+
+// Send verification email
+await sendEmail({
+  to: 'user@example.com',
+  subject: 'Verify your email',
+  template: 'verification',
+  variables: { name: 'John', link: 'https://...' }
+});
+```
+
+### File Storage
+
+```typescript
+import { storage } from '$lib/server/storage';
+
+// Upload file
+const url = await storage.upload(file, 'uploads/avatar.png');
+
+// Delete file
+await storage.delete('uploads/avatar.png');
+
+// List files
+const files = await storage.list('uploads/');
+```
+
+### Real-time SSE
+
+```typescript
+// Client-side
+import { useSSE } from '$lib/hooks/useSSE';
+
+const { data, error, connected } = useSSE('/api/notifications/stream');
+
+$effect(() => {
+  if (data) {
+    console.log('New notification:', data);
+  }
+});
+```
+
+### CLI Generator
+
+```bash
+# Generate a new component
+npm run generate
+# Select: component
+# Name: MyComponent
+# Creates: src/lib/components/ui/MyComponent.svelte
+
+# Generate a new route
+npm run generate
+# Select: route
+# Path: /dashboard/analytics
+# Creates: src/routes/dashboard/analytics/+page.svelte
+
+# Generate a new API endpoint
+npm run generate
+# Select: api
+# Path: /api/users
+# Creates: src/routes/api/users/+server.ts
 ```
 
 ---
 
 ## 📦 Examples
 
-Svelteship includes optional features in `src/examples/` that you can copy into your project:
+Optional features in `src/examples/` that you can copy into your project:
 
 | Example | Description |
 |---------|-------------|
@@ -334,26 +451,18 @@ Svelteship includes optional features in `src/examples/` that you can copy into 
 
 ### Using Examples
 
-1. Copy the example folder to your routes
-2. Follow the README in each example
-3. Add required database schema if needed
-
 ```bash
 # Example: Add notifications
 cp -r src/examples/notifications src/routes/(app)/notifications
 ```
 
-Each example includes:
-- `README.md` - Setup instructions
-- `+page.svelte` - Route component
-- `+page.server.ts` - Server logic
-- `schema.ts` - Database schema (if needed)
+Each example includes README with setup instructions.
 
 ---
 
 ## 🧪 Testing
 
-Svelteship includes comprehensive testing:
+Svelteship includes comprehensive testing with **476+ tests**:
 
 ### Unit Tests (Vitest)
 
@@ -378,10 +487,16 @@ npm run test:e2e:ui
 ### Test Coverage
 
 - ✅ Input validation (email, password)
-- ✅ Authentication flows (register, login, logout)
+- ✅ Authentication flows (register, login, logout, OAuth)
 - ✅ Protected route guards
 - ✅ Profile management
 - ✅ Theme persistence
+- ✅ Form components
+- ✅ i18n translations
+- ✅ Email service
+- ✅ File storage
+- ✅ SSE hooks
+- ✅ Analytics
 
 ---
 
@@ -413,6 +528,7 @@ Set these environment variables in your deployment platform:
 
 - `DATABASE_URL` - PostgreSQL connection string
 - `NODE_ENV` - Set to `production`
+- OAuth, Email, Storage credentials as needed
 
 ---
 
@@ -441,13 +557,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Drizzle ORM](https://orm.drizzle.team/) - Database toolkit
 - [DaisyUI](https://daisyui.com/) - Component library
 - [Tailwind CSS](https://tailwindcss.com/) - CSS framework
-
----
-
-## 📬 Contact
-
-- GitHub Issues: [Report a bug](https://github.com/yourusername/svelteship/issues)
-- Twitter: [@yourusername](https://twitter.com/yourusername)
+- [Resend](https://resend.com/) - Email service
 
 ---
 

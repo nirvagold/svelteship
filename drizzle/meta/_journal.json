@@ -29,6 +29,13 @@
       "when": 1767084946337,
       "tag": "0003_smart_sharon_ventura",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1767099501103,
+      "tag": "0004_free_lester",
+      "breakpoints": true
     }
   ]
 }
