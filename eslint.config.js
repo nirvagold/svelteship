@@ -35,6 +35,13 @@ export default ts.config(
 		}
 	},
 	{
+		// Allow @html in component showcase page (static code examples, not user input)
+		files: ['src/routes/components/+page.svelte'],
+		rules: {
+			'svelte/no-at-html-tags': 'off'
+		}
+	},
+	{
 		ignores: ['build/', '.svelte-kit/', 'dist/', 'node_modules/']
 	}
 );
