@@ -28,7 +28,6 @@ npm-debug.log*
 
 # Testing
 /coverage
-*.test.ts
 
 # Kiro
 /.kiro
