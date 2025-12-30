@@ -5,8 +5,8 @@
 			<div class="max-w-2xl">
 				<h1 class="text-5xl font-bold">🚀 Svelteship</h1>
 				<p class="py-6 text-lg text-base-content/70">
-					Full-stack SvelteKit boilerplate dengan authentication, database, dan UI components yang
-					siap pakai. Ship aplikasi web modern dengan cepat dan aman.
+					Full-stack SvelteKit boilerplate with authentication, database, and UI components ready
+					to use. Ship modern web applications quickly and securely.
 				</p>
 				<div class="flex gap-4 justify-center flex-wrap">
 					<a href="/register" class="btn btn-primary btn-lg">Get Started</a>
@@ -19,7 +19,7 @@
 						<div class="card-body items-center text-center">
 							<div class="text-4xl mb-2">🔐</div>
 							<h3 class="card-title text-lg">Authentication</h3>
-							<p class="text-sm text-base-content/70">Lucia Auth dengan session management</p>
+							<p class="text-sm text-base-content/70">Lucia Auth with session management</p>
 						</div>
 					</div>
 					<div class="card bg-base-100 shadow-md">
