@@ -8,7 +8,7 @@
 
 **Production-ready SvelteKit boilerplate** with authentication, database, and UI components. Ship modern web applications quickly and securely.
 
-[Demo](https://svelteship.vercel.app) · [Documentation](#documentation) · [Report Bug](https://github.com/yourusername/svelteship/issues) · [Request Feature](https://github.com/yourusername/svelteship/issues)
+[Preview]((https://nirvagold.github.io/svelteship/preview/)) · [Documentation](#documentation) · [Report Bug](https://github.com/nirvagold/svelteship/issues) · [Request Feature](https://github.com/nirvagold/svelteship/issues)
 
 ---
 
