@@ -85,7 +85,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/svelteship.git
+git clone https://github.com/nirvagold/svelteship.git
 cd svelteship
 
 # Install dependencies
