@@ -1,10 +1,13 @@
-import type { PageServerLoad, Actions } from './$types';
+// NOTE: This is an example file. Copy to src/routes/(app)/onboarding/ to use.
+// TypeScript types will be generated automatically when placed in routes folder.
+
+import type { RequestEvent } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { users } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }: RequestEvent) => {
 	if (!locals.user) {
 		throw redirect(302, '/login');
 	}
@@ -22,8 +25,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-export const actions: Actions = {
-	default: async ({ request, locals }) => {
+export const actions = {
+	default: async ({ request, locals }: RequestEvent) => {
 		if (!locals.user) {
 			throw redirect(302, '/login');
 		}

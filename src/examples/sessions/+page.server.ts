@@ -1,11 +1,14 @@
-import type { PageServerLoad, Actions } from './$types';
+// NOTE: This is an example file. Copy to src/routes/(app)/settings/sessions/ to use.
+// TypeScript types will be generated automatically when placed in routes folder.
+
+import type { RequestEvent } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { sessions } from '$lib/server/db/schema';
 import { eq, and, ne } from 'drizzle-orm';
 import { lucia } from '$lib/server/auth';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }: RequestEvent) => {
 	if (!locals.user || !locals.session) {
 		throw redirect(302, '/login');
 	}
@@ -30,8 +33,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-export const actions: Actions = {
-	revoke: async ({ request, locals }) => {
+export const actions = {
+	revoke: async ({ request, locals }: RequestEvent) => {
 		if (!locals.user || !locals.session) {
 			throw redirect(302, '/login');
 		}
@@ -70,7 +73,7 @@ export const actions: Actions = {
 		}
 	},
 
-	revokeAll: async ({ locals }) => {
+	revokeAll: async ({ locals }: RequestEvent) => {
 		if (!locals.user || !locals.session) {
 			throw redirect(302, '/login');
 		}

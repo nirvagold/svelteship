@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
-	import Onboarding from '$lib/components/Onboarding.svelte';
+	import Onboarding from './Onboarding.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import Dropdown from '$lib/components/ui/Dropdown.svelte';
 

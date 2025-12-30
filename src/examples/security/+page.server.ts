@@ -1,4 +1,7 @@
-import type { PageServerLoad, Actions } from './$types';
+// NOTE: This is an example file. Copy to src/routes/(app)/settings/security/ to use.
+// TypeScript types will be generated automatically when placed in routes folder.
+
+import type { RequestEvent } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import {
@@ -13,7 +16,7 @@ import { verify, hash } from '@node-rs/argon2';
 import { lucia } from '$lib/server/auth';
 import { sendAccountDeletedEmail } from '$lib/server/email';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }: RequestEvent) => {
 	if (!locals.user) {
 		throw redirect(302, '/login');
 	}
@@ -26,8 +29,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-export const actions: Actions = {
-	changePassword: async ({ request, locals, cookies }) => {
+export const actions = {
+	changePassword: async ({ request, locals, cookies }: RequestEvent) => {
 		if (!locals.user || !locals.session) {
 			throw redirect(302, '/login');
 		}
@@ -110,7 +113,7 @@ export const actions: Actions = {
 		}
 	},
 
-	deleteAccount: async ({ request, locals, cookies }) => {
+	deleteAccount: async ({ request, locals, cookies }: RequestEvent) => {
 		if (!locals.user) {
 			throw redirect(302, '/login');
 		}

@@ -1,10 +1,13 @@
-import type { PageServerLoad, Actions } from './$types';
+// NOTE: This is an example file. Copy to src/routes/(app)/notifications/ to use.
+// TypeScript types will be generated automatically when placed in routes folder.
+
+import type { RequestEvent } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
 import { notifications } from '$lib/server/db/schema';
 import { eq, and, desc } from 'drizzle-orm';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = async ({ locals }: RequestEvent) => {
 	if (!locals.user) {
 		throw redirect(302, '/login');
 	}
@@ -24,8 +27,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 	};
 };
 
-export const actions: Actions = {
-	markRead: async ({ request, locals }) => {
+export const actions = {
+	markRead: async ({ request, locals }: RequestEvent) => {
 		if (!locals.user) {
 			throw redirect(302, '/login');
 		}
@@ -58,7 +61,7 @@ export const actions: Actions = {
 		}
 	},
 
-	markAllRead: async ({ locals }) => {
+	markAllRead: async ({ locals }: RequestEvent) => {
 		if (!locals.user) {
 			throw redirect(302, '/login');
 		}
@@ -76,7 +79,7 @@ export const actions: Actions = {
 		}
 	},
 
-	delete: async ({ request, locals }) => {
+	delete: async ({ request, locals }: RequestEvent) => {
 		if (!locals.user) {
 			throw redirect(302, '/login');
 		}
