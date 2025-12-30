@@ -16,7 +16,6 @@ export const users = pgTable('users', {
 	name: text('name'),
 	avatarUrl: text('avatar_url'),
 	emailVerified: boolean('email_verified').default(false).notNull(),
-	onboardingCompleted: boolean('onboarding_completed').default(false).notNull(),
 	preferences: jsonb('preferences').$type<UserPreferences>(),
 	role: text('role').default('user').notNull(), // 'user' | 'admin'
 	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
@@ -55,20 +54,8 @@ export const emailVerificationTokens = pgTable('email_verification_tokens', {
 	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
 });
 
-
-// Notifications table
-export const notifications = pgTable('notifications', {
-	id: text('id').primaryKey(),
-	userId: text('user_id')
-		.notNull()
-		.references(() => users.id, { onDelete: 'cascade' }),
-	title: text('title').notNull(),
-	message: text('message').notNull(),
-	type: text('type').notNull(), // 'info' | 'success' | 'warning' | 'error'
-	read: boolean('read').default(false).notNull(),
-	link: text('link'),
-	createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull()
-});
+// NOTE: Notifications table moved to src/examples/notifications/schema.sql
+// Copy and run that schema if you need notifications feature
 
 // Type exports
 export type User = typeof users.$inferSelect;
@@ -79,5 +66,3 @@ export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
 export type NewPasswordResetToken = typeof passwordResetTokens.$inferInsert;
 export type EmailVerificationToken = typeof emailVerificationTokens.$inferSelect;
 export type NewEmailVerificationToken = typeof emailVerificationTokens.$inferInsert;
-export type Notification = typeof notifications.$inferSelect;
-export type NewNotification = typeof notifications.$inferInsert;

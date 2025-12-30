@@ -1,10 +1,13 @@
 // NOTE: This is an example file. Copy to src/routes/(app)/notifications/ to use.
 // TypeScript types will be generated automatically when placed in routes folder.
+// IMPORTANT: Also copy schema.ts to your main schema or run schema.sql
 
 import type { RequestEvent } from '@sveltejs/kit';
 import { fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/server/db';
-import { notifications } from '$lib/server/db/schema';
+// When using this example, import notifications from your main schema after adding it
+// import { notifications } from '$lib/server/db/schema';
+import { notifications } from './schema';
 import { eq, and, desc } from 'drizzle-orm';
 
 export const load = async ({ locals }: RequestEvent) => {

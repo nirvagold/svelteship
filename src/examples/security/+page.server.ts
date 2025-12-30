@@ -8,8 +8,7 @@ import {
 	users,
 	sessions,
 	passwordResetTokens,
-	emailVerificationTokens,
-	notifications
+	emailVerificationTokens
 } from '$lib/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { verify, hash } from '@node-rs/argon2';
@@ -156,7 +155,7 @@ export const actions = {
 
 			// Delete all user data (cascade will handle related tables)
 			// But let's be explicit for safety
-			await db.delete(notifications).where(eq(notifications.userId, locals.user.id));
+			// NOTE: If using notifications example, also delete: await db.delete(notifications).where(eq(notifications.userId, locals.user.id));
 			await db.delete(emailVerificationTokens).where(eq(emailVerificationTokens.userId, locals.user.id));
 			await db.delete(passwordResetTokens).where(eq(passwordResetTokens.userId, locals.user.id));
 			await db.delete(sessions).where(eq(sessions.userId, locals.user.id));
