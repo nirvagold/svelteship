@@ -72,6 +72,9 @@
 					class="input input-bordered w-full"
 					required
 				/>
+				<label class="label" for="password">
+					<a href="/forgot-password" class="label-text-alt link link-hover">Forgot password?</a>
+				</label>
 			</div>
 
 			<button
