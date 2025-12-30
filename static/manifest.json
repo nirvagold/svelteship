@@ -1,0 +1,20 @@
+{
+	"name": "Svelteship",
+	"short_name": "Svelteship",
+	"description": "Full-stack SvelteKit boilerplate with auth, database, and UI components",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#1d232a",
+	"theme_color": "#570df8",
+	"orientation": "portrait-primary",
+	"icons": [
+		{
+			"src": "/favicon.png",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"categories": ["productivity", "utilities"],
+	"lang": "en"
+}
