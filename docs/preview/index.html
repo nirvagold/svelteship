@@ -54,31 +54,37 @@
       border-radius: 16px;
       padding: 24px;
     }
+    .dashboard-sidebar {
+      width: 220px;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+    }
   </style>
 </head>
-<body class="p-8">
-  <div class="max-w-6xl mx-auto">
+<body class="p-4 md:p-8">
+  <div class="max-w-5xl mx-auto">
     <!-- Header -->
-    <div class="text-center mb-16">
-      <div class="glass-card inline-block mb-8 px-8 py-6">
-        <h1 class="text-5xl font-bold text-white mb-4">🚀 Svelteship</h1>
-        <p class="text-white/80 text-lg">Interactive preview of the boilerplate pages</p>
+    <div class="text-center mb-12">
+      <div class="glass-card inline-block mb-6 px-6 py-4">
+        <h1 class="text-4xl font-bold text-white mb-2">🚀 Svelteship</h1>
+        <p class="text-white/80">Interactive preview of the boilerplate pages</p>
       </div>
-      <div class="flex justify-center gap-4">
-        <a href="https://github.com/nirvagold/svelteship" class="btn btn-lg bg-white text-purple-600 hover:bg-white/90 border-0">
+      <div class="flex justify-center gap-3 flex-wrap">
+        <a href="https://github.com/nirvagold/svelteship" class="btn bg-white text-purple-600 hover:bg-white/90 border-0">
           <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          View on GitHub
+          GitHub
         </a>
-        <button onclick="toggleTheme()" class="btn btn-lg bg-white/20 text-white hover:bg-white/30 border-0">
+        <button onclick="toggleTheme()" class="btn bg-white/20 text-white hover:bg-white/30 border-0">
           🌙 Toggle Theme
         </button>
       </div>
     </div>
 
     <!-- Landing Page -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
-        <span class="bg-white/20 p-2 rounded-lg">🏠</span> Landing Page
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4 section-title flex items-center gap-2">
+        <span class="bg-white/20 p-2 rounded-lg text-lg">🏠</span> Landing Page
       </h2>
       <div class="preview-frame">
         <div class="preview-header">
@@ -90,38 +96,37 @@
           <div class="preview-url">localhost:5173</div>
         </div>
         <div data-theme="nord">
-          <div class="hero min-h-[500px] bg-base-200">
+          <div class="hero py-16 bg-base-200">
             <div class="hero-content text-center">
-              <div class="max-w-2xl">
-                <h1 class="text-5xl font-bold">🚀 Svelteship</h1>
-                <p class="py-6 text-lg text-base-content/70">
+              <div class="max-w-xl">
+                <h1 class="text-4xl font-bold">🚀 Svelteship</h1>
+                <p class="py-4 text-base-content/70">
                   Full-stack SvelteKit boilerplate with authentication, database, and UI components ready to use.
-                  Ship modern web applications quickly and securely.
                 </p>
-                <div class="flex gap-4 justify-center flex-wrap">
-                  <button class="btn btn-primary btn-lg">Get Started</button>
-                  <button class="btn btn-outline btn-lg">Sign In</button>
+                <div class="flex gap-3 justify-center flex-wrap">
+                  <button class="btn btn-primary">Get Started</button>
+                  <button class="btn btn-outline">Sign In</button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-                  <div class="card bg-base-100 shadow-md">
-                    <div class="card-body items-center text-center">
-                      <div class="text-4xl mb-2">🔐</div>
-                      <h3 class="card-title text-lg">Authentication</h3>
-                      <p class="text-sm text-base-content/70">Lucia Auth with session management</p>
+                <div class="grid grid-cols-3 gap-4 mt-10">
+                  <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body p-4 items-center text-center">
+                      <div class="text-2xl">🔐</div>
+                      <h3 class="font-semibold text-sm">Authentication</h3>
+                      <p class="text-xs text-base-content/60">Lucia Auth</p>
                     </div>
                   </div>
-                  <div class="card bg-base-100 shadow-md">
-                    <div class="card-body items-center text-center">
-                      <div class="text-4xl mb-2">🗄️</div>
-                      <h3 class="card-title text-lg">Database</h3>
-                      <p class="text-sm text-base-content/70">PostgreSQL + Drizzle ORM</p>
+                  <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body p-4 items-center text-center">
+                      <div class="text-2xl">🗄️</div>
+                      <h3 class="font-semibold text-sm">Database</h3>
+                      <p class="text-xs text-base-content/60">Drizzle ORM</p>
                     </div>
                   </div>
-                  <div class="card bg-base-100 shadow-md">
-                    <div class="card-body items-center text-center">
-                      <div class="text-4xl mb-2">🎨</div>
-                      <h3 class="card-title text-lg">UI Components</h3>
-                      <p class="text-sm text-base-content/70">Tailwind CSS + DaisyUI</p>
+                  <div class="card bg-base-100 shadow-sm">
+                    <div class="card-body p-4 items-center text-center">
+                      <div class="text-2xl">🎨</div>
+                      <h3 class="font-semibold text-sm">UI Components</h3>
+                      <p class="text-xs text-base-content/60">DaisyUI</p>
                     </div>
                   </div>
                 </div>
@@ -133,9 +138,9 @@
     </section>
 
     <!-- Login Page -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
-        <span class="bg-white/20 p-2 rounded-lg">🔑</span> Login Page
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4 section-title flex items-center gap-2">
+        <span class="bg-white/20 p-2 rounded-lg text-lg">🔑</span> Login Page
       </h2>
       <div class="preview-frame">
         <div class="preview-header">
@@ -146,22 +151,22 @@
           </div>
           <div class="preview-url">localhost:5173/login</div>
         </div>
-        <div data-theme="nord" class="p-8 flex justify-center bg-base-200 min-h-[400px] items-center">
-          <div class="card bg-base-100 shadow-xl w-full max-w-md">
-            <div class="card-body">
-              <h1 class="card-title text-2xl font-bold justify-center mb-2">Welcome Back</h1>
-              <p class="text-center text-base-content/70 mb-4">Sign in to your Svelteship account</p>
+        <div data-theme="nord" class="p-8 flex justify-center bg-base-200">
+          <div class="card bg-base-100 shadow-xl w-full max-w-sm">
+            <div class="card-body p-6">
+              <h1 class="text-xl font-bold text-center mb-1">Welcome Back</h1>
+              <p class="text-center text-base-content/60 text-sm mb-4">Sign in to your account</p>
+              <div class="form-control mb-3">
+                <label class="label py-1"><span class="label-text text-sm">Email</span></label>
+                <input type="email" placeholder="you@example.com" class="input input-bordered input-sm w-full" />
+              </div>
               <div class="form-control mb-4">
-                <label class="label"><span class="label-text">Email</span></label>
-                <input type="email" placeholder="you@example.com" class="input input-bordered w-full" />
+                <label class="label py-1"><span class="label-text text-sm">Password</span></label>
+                <input type="password" placeholder="••••••••" class="input input-bordered input-sm w-full" />
               </div>
-              <div class="form-control mb-6">
-                <label class="label"><span class="label-text">Password</span></label>
-                <input type="password" placeholder="Enter your password" class="input input-bordered w-full" value="password123" />
-              </div>
-              <button class="btn btn-primary w-full">Sign In</button>
-              <div class="divider">OR</div>
-              <p class="text-center text-sm">
+              <button class="btn btn-primary btn-sm w-full">Sign In</button>
+              <div class="divider text-xs my-2">OR</div>
+              <p class="text-center text-xs">
                 Don't have an account? <a href="#" class="link link-primary">Create one</a>
               </p>
             </div>
@@ -171,9 +176,9 @@
     </section>
 
     <!-- Dashboard -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
-        <span class="bg-white/20 p-2 rounded-lg">📊</span> Dashboard
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4 section-title flex items-center gap-2">
+        <span class="bg-white/20 p-2 rounded-lg text-lg">📊</span> Dashboard
       </h2>
       <div class="preview-frame">
         <div class="preview-header">
@@ -185,81 +190,65 @@
           <div class="preview-url">localhost:5173/dashboard</div>
         </div>
         <div data-theme="nord">
-          <div class="flex">
+          <div class="flex min-h-[420px]">
             <!-- Sidebar -->
-            <aside class="bg-base-100 w-64 border-r border-base-300 hidden md:flex md:flex-col" style="min-height: 500px;"></aside>
-              <div class="p-4 border-b border-base-300">
-                <span class="text-xl font-bold">🚀 Svelteship</span>
+            <aside class="dashboard-sidebar bg-base-100 border-r border-base-300">
+              <div class="p-3 border-b border-base-300">
+                <span class="text-lg font-bold">🚀 Svelteship</span>
               </div>
-              <ul class="menu p-4 gap-1 flex-1">
-                <li><a class="active bg-primary/10 text-primary">🏠 Dashboard</a></li>
-                <li><a>👤 Profile</a></li>
+              <ul class="menu p-2 gap-1 flex-1">
+                <li><a class="active bg-primary/10 text-primary text-sm py-2">🏠 Dashboard</a></li>
+                <li><a class="text-sm py-2">👤 Profile</a></li>
               </ul>
-              <div class="p-4 border-t border-base-300">
-                <div class="flex items-center gap-3">
+              <div class="p-3 border-t border-base-300">
+                <div class="flex items-center gap-2">
                   <div class="avatar placeholder">
-                    <div class="bg-primary text-primary-content w-10 rounded-full">
+                    <div class="bg-primary text-primary-content w-8 rounded-full text-xs">
                       <span>U</span>
                     </div>
                   </div>
-                  <div>
-                    <p class="text-sm font-medium">User</p>
-                    <p class="text-xs text-base-content/60">user@example.com</p>
+                  <div class="min-w-0">
+                    <p class="text-xs font-medium truncate">User</p>
+                    <p class="text-xs text-base-content/50 truncate">user@example.com</p>
                   </div>
                 </div>
               </div>
             </aside>
             <!-- Main Content -->
-            <main class="flex-1 p-6 bg-base-200">
-              <div class="max-w-4xl">
-                <div class="mb-8">
-                  <h1 class="text-3xl font-bold mb-2">Welcome back, User!</h1>
-                  <p class="text-base-content/70">Here's what's happening with your account.</p>
+            <main class="flex-1 p-4 bg-base-200 overflow-auto">
+              <div class="mb-4">
+                <h1 class="text-xl font-bold">Welcome back, User!</h1>
+                <p class="text-sm text-base-content/60">Here's what's happening with your account.</p>
+              </div>
+              <div class="grid grid-cols-3 gap-3 mb-4">
+                <div class="stat bg-base-100 rounded-lg shadow-sm p-3">
+                  <div class="stat-title text-xs">Account</div>
+                  <div class="stat-value text-primary text-lg">Active</div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                  <div class="stat bg-base-100 rounded-box shadow">
-                    <div class="stat-title">Account Status</div>
-                    <div class="stat-value text-primary text-2xl">Active</div>
-                    <div class="stat-desc">Your account is in good standing</div>
-                  </div>
-                  <div class="stat bg-base-100 rounded-box shadow">
-                    <div class="stat-title">Security</div>
-                    <div class="stat-value text-secondary text-2xl">Secure</div>
-                    <div class="stat-desc">Session authenticated</div>
-                  </div>
-                  <div class="stat bg-base-100 rounded-box shadow">
-                    <div class="stat-title">Stack</div>
-                    <div class="stat-value text-accent text-2xl">Ready</div>
-                    <div class="stat-desc">SvelteKit + Lucia + Drizzle</div>
-                  </div>
+                <div class="stat bg-base-100 rounded-lg shadow-sm p-3">
+                  <div class="stat-title text-xs">Security</div>
+                  <div class="stat-value text-secondary text-lg">Secure</div>
                 </div>
-                <div class="card bg-base-100 shadow-lg">
-                  <div class="card-body">
-                    <h2 class="card-title mb-4">💡 Getting Started</h2>
-                    <div class="space-y-4">
-                      <div class="flex gap-4 items-start">
-                        <div class="badge badge-primary badge-lg">1</div>
-                        <div>
-                          <h3 class="font-semibold">Customize your profile</h3>
-                          <p class="text-base-content/70 text-sm">Add your name and personalize your account.</p>
-                        </div>
-                      </div>
-                      <div class="divider my-2"></div>
-                      <div class="flex gap-4 items-start">
-                        <div class="badge badge-primary badge-lg">2</div>
-                        <div>
-                          <h3 class="font-semibold">Explore the codebase</h3>
-                          <p class="text-base-content/70 text-sm">Check out the project structure.</p>
-                        </div>
-                      </div>
-                      <div class="divider my-2"></div>
-                      <div class="flex gap-4 items-start">
-                        <div class="badge badge-primary badge-lg">3</div>
-                        <div>
-                          <h3 class="font-semibold">Build your features</h3>
-                          <p class="text-base-content/70 text-sm">Start adding your own routes and components.</p>
-                        </div>
-                      </div>
+                <div class="stat bg-base-100 rounded-lg shadow-sm p-3">
+                  <div class="stat-title text-xs">Stack</div>
+                  <div class="stat-value text-accent text-lg">Ready</div>
+                </div>
+              </div>
+              <div class="card bg-base-100 shadow-sm">
+                <div class="card-body p-4">
+                  <h2 class="font-semibold mb-3">💡 Getting Started</h2>
+                  <div class="space-y-2 text-sm">
+                    <div class="flex gap-2 items-center">
+                      <span class="badge badge-primary badge-sm">1</span>
+                      <span>Customize your profile</span>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <span class="badge badge-primary badge-sm">2</span>
+                      <span>Explore the codebase</span>
+                    </div>
+                    <div class="flex gap-2 items-center">
+                      <span class="badge badge-primary badge-sm">3</span>
+                      <span>Build your features</span>
                     </div>
                   </div>
                 </div>
@@ -271,9 +260,9 @@
     </section>
 
     <!-- Profile Page -->
-    <section class="mb-16">
-      <h2 class="text-3xl font-bold mb-6 section-title flex items-center gap-3">
-        <span class="bg-white/20 p-2 rounded-lg">👤</span> Profile Page
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-4 section-title flex items-center gap-2">
+        <span class="bg-white/20 p-2 rounded-lg text-lg">👤</span> Profile Page
       </h2>
       <div class="preview-frame">
         <div class="preview-header">
@@ -284,37 +273,34 @@
           </div>
           <div class="preview-url">localhost:5173/profile</div>
         </div>
-        <div data-theme="nord" class="p-6 bg-base-200 min-h-[450px]">
-          <div class="max-w-2xl mx-auto">
-            <div class="mb-8">
-              <h1 class="text-3xl font-bold mb-2">Profile</h1>
-              <p class="text-base-content/70">Manage your account information.</p>
+        <div data-theme="nord" class="p-6 bg-base-200">
+          <div class="max-w-lg mx-auto">
+            <div class="mb-4">
+              <h1 class="text-xl font-bold">Profile</h1>
+              <p class="text-sm text-base-content/60">Manage your account information.</p>
             </div>
-            <div class="card bg-base-100 shadow-lg mb-6">
-              <div class="card-body">
-                <h2 class="card-title mb-4">👤 Account Information</h2>
+            <div class="card bg-base-100 shadow-sm mb-4">
+              <div class="card-body p-4">
+                <h2 class="font-semibold text-sm mb-3">👤 Account Information</h2>
                 <div>
-                  <label class="label"><span class="label-text font-medium">Email</span></label>
-                  <input type="email" value="user@example.com" class="input input-bordered w-full bg-base-200" disabled />
-                  <p class="label"><span class="label-text-alt text-base-content/60">Email cannot be changed</span></p>
+                  <label class="label py-1"><span class="label-text text-sm">Email</span></label>
+                  <input type="email" value="user@example.com" class="input input-bordered input-sm w-full bg-base-200" disabled />
+                  <p class="text-xs text-base-content/50 mt-1">Email cannot be changed</p>
                 </div>
               </div>
             </div>
-            <div class="card bg-base-100 shadow-lg">
-              <div class="card-body">
-                <h2 class="card-title mb-4">✏️ Update Profile</h2>
-                <div class="alert alert-success mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  <span>Profile updated successfully!</span>
+            <div class="card bg-base-100 shadow-sm">
+              <div class="card-body p-4">
+                <h2 class="font-semibold text-sm mb-3">✏️ Update Profile</h2>
+                <div class="alert alert-success py-2 px-3 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  <span class="text-sm">Profile updated successfully!</span>
                 </div>
-                <div class="mb-4">
-                  <label class="label"><span class="label-text font-medium">Display Name</span></label>
-                  <input type="text" placeholder="Enter your name" value="John Doe" class="input input-bordered w-full" />
-                  <p class="label"><span class="label-text-alt text-base-content/60">Max 100 characters</span></p>
+                <div class="mb-3">
+                  <label class="label py-1"><span class="label-text text-sm">Display Name</span></label>
+                  <input type="text" value="John Doe" class="input input-bordered input-sm w-full" />
                 </div>
-                <div class="pt-4">
-                  <button class="btn btn-primary">Save Changes</button>
-                </div>
+                <button class="btn btn-primary btn-sm">Save Changes</button>
               </div>
             </div>
           </div>
@@ -323,11 +309,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-12">
-      <div class="glass-card inline-block px-8 py-4">
-        <p class="text-white/80">Made with ❤️ using SvelteKit</p>
-        <p class="text-white/60 text-sm mt-2">© 2025 Svelteship</p>
-      </div>
+    <footer class="text-center py-8">
+      <p class="text-white/70 text-sm">Made with ❤️ using SvelteKit • © 2025 Svelteship</p>
     </footer>
   </div>
 
